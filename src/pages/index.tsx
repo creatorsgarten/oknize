@@ -37,6 +37,11 @@ export default function Home() {
     };
   }, []);
 
+  function updateInterval() {
+    setCurrentSlot(getCurrentSlot(ScheduleSlots));
+    setNextSlot(getNextSlot(ScheduleSlots));
+  }
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center p-12 ${nunito.className}`}
@@ -55,14 +60,11 @@ export default function Home() {
             <p>Date: 14 - 17 July, 2023</p>
             <p>Place: SCB Training Center</p>
           </CardContent>
-          {/* <CardFooter>
-            <p>14 - 17 July, 2023</p>
-          </CardFooter> */}
         </Card>
 
         <div className="col-span-2 flex flex-col gap-2 w-full">
           <h1 className="flex flex-row gap-2 items-baseline">
-            Time: <CurrentTime />
+            Time: <CurrentTime updateInterval={updateInterval} />
           </h1>
           <h1>
             Current Slot:{" "}

@@ -1,5 +1,4 @@
 export interface ScheduleSlot {
-  id: number;
   title: string;
   start: string;
   end: string;
@@ -8,9 +7,9 @@ export interface ScheduleSlot {
   responsiblePeople: string[];
 }
 
-const now = new Date();
-
 export function getCurrentSlot(schedule: ScheduleSlot[]) {
+  const now = new Date();
+
   for (const slot of schedule) {
     // start, end is in the HH:MM format
     const [startHour, startMinute] = slot.start.split(":");
@@ -39,6 +38,8 @@ export function getCurrentSlot(schedule: ScheduleSlot[]) {
 }
 
 export function getNextSlot(schedule: ScheduleSlot[]) {
+  const now = new Date();
+
   for (const slot of schedule) {
     // start, end is in the HH:MM format
     const [startHour, startMinute] = slot.start.split(":");

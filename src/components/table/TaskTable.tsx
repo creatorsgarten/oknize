@@ -31,10 +31,10 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData }) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {tableData.map((data) => {
+        {tableData.map((data, i) => {
           return (
-            <TableRow key={data.id}>
-              <TableCell className="font-medium">{data.id}</TableCell>
+            <TableRow key={`${data.title} ${i}`}>
+              <TableCell className="font-medium">{i + 1}</TableCell>
               <TableCell>{data.start}</TableCell>
               <TableCell>{data.end}</TableCell>
               <TableCell>{data.title}</TableCell>
