@@ -5241,14 +5241,13 @@ packages:
       has-symbols: 1.0.3
     dev: false
 
-<<<<<<< HEAD
-  /get-own-enumerable-property-symbols@3.0.2:
-    resolution: {integrity: sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==}
-=======
   /get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
     engines: {node: '>=6'}
->>>>>>> 2bd7b448a1bbab95ca631497fbb0195ba5f5106a
+    dev: false
+
+  /get-own-enumerable-property-symbols@3.0.2:
+    resolution: {integrity: sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g==}
     dev: false
 
   /get-stream@4.1.0:
@@ -7738,8 +7737,6 @@ packages:
       object-assign: 4.1.1
       react: 18.2.0
       react-is: 18.2.0
-<<<<<<< HEAD
-=======
     dev: false
 
   /react-style-singleton@2.2.1(@types/react@18.2.15)(react@18.2.0):
@@ -7757,7 +7754,6 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.6.0
->>>>>>> 2bd7b448a1bbab95ca631497fbb0195ba5f5106a
     dev: false
 
   /react@18.2.0:
