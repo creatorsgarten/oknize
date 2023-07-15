@@ -23,15 +23,8 @@ import {
 } from "@/components/ui/card";
 import CurrentTime from "@/components/time/CurrentTime";
 
-interface ScheduleSlot {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-  place: string;
-  remark?: string | "";
-  responsiblePeople: string[];
-}
+import { ScheduleSlot } from "@/types";
+import TaskTable from "@/components/table/TaskTable";
 
 const Schedule: ScheduleSlot[] = [
   {
@@ -96,45 +89,7 @@ export default function Home() {
       </div>
 
       <div className="mt-8 w-full">
-        <Table>
-          <TableCaption>{"A list of your event's agenda"}</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Slot</TableHead>
-              <TableHead>Start Time</TableHead>
-              <TableHead>End Time</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Place</TableHead>
-              <TableHead>Remark (Optional)</TableHead>
-              <TableHead>Responsible People</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Schedule.map((data) => {
-              return (
-                <TableRow key={data.id}>
-                  <TableCell className="font-medium">{data.id}</TableCell>
-                  <TableCell>{data.start}</TableCell>
-                  <TableCell>{data.end}</TableCell>
-                  <TableCell>{data.title}</TableCell>
-                  <TableCell>{data.place}</TableCell>
-                  <TableCell>{data.remark}</TableCell>
-                  <TableCell>{data.responsiblePeople.join(" ")}</TableCell>
-
-                  <TableCell>
-                    <div className="flex flex-row items-center gap-4">
-                      <Button className="h-8 px-6">Edit</Button>
-                      <Button className="h-8 px-6" variant="destructive">
-                        Delete
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+        <TaskTable tableData={Schedule} />
       </div>
     </main>
   );
