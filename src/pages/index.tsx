@@ -2,19 +2,17 @@ import { Nunito } from "next/font/google";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { useEffect, useState } from "react";
 import { subscribeSchedule } from "@/lib/db";
 import { ScheduleSlot, getCurrentSlot, getNextSlot } from "@/lib/schedule";
 import CurrentTime from "@/components/time/CurrentTime";
 
 import TaskTable from "@/components/table/TaskTable";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function Home() {
   const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
@@ -22,15 +20,12 @@ export default function Home() {
   const [nextSlot, setNextSlot] = useState<ScheduleSlot | null>(null);
 
   useEffect(() => {
-    const unsubscribe = subscribeSchedule(
-      "ywc19",
-      (data: { agenda: ScheduleSlot[] }) => {
-        setScheduleSlots(data.agenda);
+    const unsubscribe = subscribeSchedule("ywc19", (data: { agenda: ScheduleSlot[] }) => {
+      setScheduleSlots(data.agenda);
 
-        setCurrentSlot(getCurrentSlot(data.agenda));
-        setNextSlot(getNextSlot(data.agenda));
-      }
-    );
+      setCurrentSlot(getCurrentSlot(data.agenda));
+      setNextSlot(getNextSlot(data.agenda));
+    });
 
     return () => {
       unsubscribe();
@@ -43,9 +38,7 @@ export default function Home() {
   }
 
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center p-12 ${nunito.className}`}
-    >
+    <main className={`flex min-h-screen flex-col items-center p-12 ${nunito.className}`}>
       <div className="grid grid-cols-5 items-center justify-between w-full gap-12">
         <Card className=" col-span-3 w-full">
           <CardHeader>
@@ -77,16 +70,14 @@ export default function Home() {
           <h2>
             Next Slot:{" "}
             <span className="text-xl font-bold">
-              {nextSlot
-                ? `${nextSlot.title} ${nextSlot.start}-${nextSlot.end}`
-                : "No Slot"}
+              {nextSlot ? `${nextSlot.title} ${nextSlot.start}-${nextSlot.end}` : "No Slot"}
             </span>
           </h2>
         </div>
       </div>
 
       <div className="mt-8 w-full">
-        <TaskTable tableData={ScheduleSlots} />
+        <TaskTable tableData={ScheduleSlots} onDelete={() => {}} />
       </div>
     </main>
   );
