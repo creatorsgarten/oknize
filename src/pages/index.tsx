@@ -3,6 +3,34 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
+interface ScheduleSlot {
+  title: string;
+  start: string;
+  end: string;
+  responsiblePeople: string[];
+}
+
+const Schedule: ScheduleSlot[] = [
+  {
+    title: "Workshop",
+    start: "17:00",
+    end: "18:30",
+    responsiblePeople: ["Thee", "Sila"],
+  },
+  {
+    title: "Dinner",
+    start: "18:30",
+    end: "19:30",
+    responsiblePeople: ["Pub"],
+  },
+  {
+    title: "Staff Evaluation",
+    start: "19:30",
+    end: "20:00",
+    responsiblePeople: ["New"],
+  },
+];
+
 export default function Home() {
   return (
     <main
