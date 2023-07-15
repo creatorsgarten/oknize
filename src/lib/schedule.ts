@@ -58,3 +58,32 @@ export function getNextSlot(schedule: ScheduleSlot[]) {
   }
   return null;
 }
+
+export function sortSchedule(schedule: ScheduleSlot[]) {
+  return schedule.sort((a, b) => {
+    const diff =
+      (+a.start.split(":")[0] - +b.start.split(":")[0]) * 60 +
+      (+a.start.split(":")[1] - +b.start.split(":")[1]);
+
+    if (diff !== 0) {
+      return diff;
+    } else {
+      return (
+        (+a.end.split(":")[0] - +b.end.split(":")[0]) * 60 +
+        (+a.end.split(":")[1] - +b.end.split(":")[1])
+      );
+    }
+  });
+}
+
+export function addTaskToSchedule(
+  newTask: ScheduleSlot,
+  schedule: ScheduleSlot[]
+) {
+  // update
+  // add first then sort schedule
+}
+
+export function deleteTask() {
+  // delete
+}

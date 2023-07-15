@@ -2,6 +2,11 @@ import { Nunito } from "next/font/google";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
+const isSupported = () =>
+  "Notification" in window &&
+  "serviceWorker" in navigator &&
+  "PushManager" in window;
+
 import {
   Card,
   CardContent,

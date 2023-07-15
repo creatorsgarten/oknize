@@ -35,7 +35,17 @@ export function subscribeSchedule(uid: string, callback: Function) {
   });
 }
 
+// add
+export async function addTask(uid: string, task: DocumentData) {
+  // sor ttask first then update
+}
+
+export async function deleteTask(uid: string, task: DocumentData) {
+  //  filter task then update
+}
+
+// udpate
 export async function setSchedule(uid: string, schedule: DocumentData) {
   const scheduleRef = getScheduleRef(uid);
-  await setDoc(scheduleRef, schedule);
+  await setDoc(scheduleRef, schedule, { merge: true });
 }
