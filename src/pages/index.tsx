@@ -3,17 +3,6 @@ import { Nunito } from "next/font/google";
 const nunito = Nunito({ subsets: ["latin"] });
 
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-
-import {
   Card,
   CardContent,
   CardDescription,
@@ -23,6 +12,9 @@ import {
 import { useEffect, useState } from "react";
 import { subscribeSchedule } from "@/lib/db";
 import { ScheduleSlot, getCurrentSlot, getNextSlot } from "@/lib/schedule";
+import CurrentTime from "@/components/time/CurrentTime";
+
+import TaskTable from "@/components/table/TaskTable";
 
 export default function Home() {
   const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
@@ -47,7 +39,7 @@ export default function Home() {
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center p-24 ${nunito.className}`}
+      className={`flex min-h-screen flex-col items-center p-12 ${nunito.className}`}
     >
       <div className="grid grid-cols-5 items-center justify-between w-full gap-12">
         <Card className=" col-span-3 w-full">
@@ -68,7 +60,10 @@ export default function Home() {
           </CardFooter> */}
         </Card>
 
-        <div className="col-span-2 flex flex-col gap-4 w-full">
+        <div className="col-span-2 flex flex-col gap-2 w-full">
+          <h1 className="flex flex-row gap-2 items-baseline">
+            Time: <CurrentTime />
+          </h1>
           <h1>
             Current Slot:{" "}
             <span className="text-xl font-bold">
@@ -77,53 +72,19 @@ export default function Home() {
                 : "No Slot"}
             </span>
           </h1>
-          <h1>
+          <h2>
             Next Slot:{" "}
             <span className="text-xl font-bold">
               {nextSlot
                 ? `${nextSlot.title} ${nextSlot.start}-${nextSlot.end}`
                 : "No Slot"}
             </span>
-          </h1>
+          </h2>
         </div>
       </div>
 
-      <div className="mt-6 w-full">
-        <Table>
-          <TableCaption>{"A list of your event's agenda"}</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[100px]">Slot</TableHead>
-              <TableHead>Start Time</TableHead>
-              <TableHead>End Time</TableHead>
-              <TableHead>Title</TableHead>
-              <TableHead>Responsible People</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {ScheduleSlots.map((data) => {
-              return (
-                <TableRow key={data.id}>
-                  <TableCell className="font-medium">{data.id}</TableCell>
-                  <TableCell>{data.start}</TableCell>
-                  <TableCell>{data.end}</TableCell>
-                  <TableCell>{data.title}</TableCell>
-                  <TableCell>{data.responsiblePeople.join(" ")}</TableCell>
-
-                  <TableCell>
-                    <div className="flex flex-row items-center gap-4">
-                      <Button className="h-8 px-6">Edit</Button>
-                      <Button className="h-8 px-6" variant="destructive">
-                        Delete
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+      <div className="mt-8 w-full">
+        <TaskTable tableData={ScheduleSlots} />
       </div>
     </main>
   );
