@@ -91,7 +91,7 @@ export default function Home() {
       </div>
 
       <div className="mt-8 w-full">
-        <TaskTable tableData={ScheduleSlots} />
+        <TaskTable tableData={ScheduleSlots} onDelete={() => {}} />
       </div>
     </main>
   );
