@@ -4,7 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ScheduleSlot } from "@/lib/schedule";
-import { useState } from "react";
+import Link from "next/link";
+import { ChangeEventHandler, useState } from "react";
 
 interface Event {
   name: string;
@@ -31,17 +32,35 @@ const CreateEventPage = () => {
     },
   });
 
-  const [scheduleData, setScheduleData] = useState<ScheduleSlot>({
+  const [scheduleData, setScheduleData] = useState({
     title: "",
     start: "",
     end: "",
     place: "",
-    responsiblePeople: [],
+    responsiblePeople: "",
   });
 
-  const [taskData, setTaskData] = useState();
+  const [taskData, setTaskData] = useState<ScheduleSlot[]>([]);
+  const [test, setTest] = useState("");
 
-  const handleOnAddTaskData = () => {};
+  const handleOnTaskInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setScheduleData({ ...scheduleData, [event.target.id]: event.target.value });
+  };
+
+  const handleOnAddTaskData = () => {
+    const newScheduleData = {
+      ...scheduleData,
+      responsiblePeople: scheduleData.responsiblePeople.split(" "),
+    };
+    setTaskData([...taskData, newScheduleData]);
+    setScheduleData({
+      title: "",
+      start: "",
+      end: "",
+      place: "",
+      responsiblePeople: "",
+    });
+  };
 
   const handleOnDeleteTaskData = () => {};
 
@@ -98,27 +117,57 @@ const CreateEventPage = () => {
         <div className="grid grid-cols-12 gap-4 items-end">
           <div className="col-span-2 w-full items-center ">
             <Label htmlFor="scheduleStart">Start</Label>
-            <Input type="text" id="scheduleStart" placeholder="(e.g. 12:00)" />
+            <Input
+              type="text"
+              id="start"
+              placeholder="(e.g. 12:00)"
+              value={scheduleData.start}
+              onChange={handleOnTaskInputChange}
+            />
           </div>
 
           <div className="col-span-2 w-full items-center">
             <Label htmlFor="scheduleEnd">End</Label>
-            <Input type="text" id="scheduleEnd" placeholder="(e.g. 12:00)<" />
+            <Input
+              type="text"
+              id="end"
+              placeholder="(e.g. 12:00)"
+              value={scheduleData.end}
+              onChange={handleOnTaskInputChange}
+            />
           </div>
 
           <div className="col-span-3 w-full items-center ">
             <Label htmlFor="title">Title</Label>
-            <Input type="text" id="title" placeholder="(e.g. Hacking Time / Opening Ceremony)" />
+            <Input
+              type="text"
+              id="title"
+              placeholder="(e.g. Hacking Time / Opening Ceremony)"
+              value={scheduleData.title}
+              onChange={handleOnTaskInputChange}
+            />
           </div>
 
           <div className="col-span-2 w-full items-center ">
             <Label htmlFor="place">Place</Label>
-            <Input type="text" id="place" placeholder="(e.g. SBCx-plore)" />
+            <Input
+              type="text"
+              id="place"
+              placeholder="(e.g. SBCx-plore)"
+              value={scheduleData.place}
+              onChange={handleOnTaskInputChange}
+            />
           </div>
 
           <div className="col-span-2 w-full items-center">
             <Label htmlFor="responsiblePeople">Responsible People</Label>
-            <Input type="text" id="responsiblePeople" placeholder="(e.g. Sila Tee)" />
+            <Input
+              type="text"
+              id="responsiblePeople"
+              placeholder="(e.g. Sila Tee)"
+              value={scheduleData.responsiblePeople}
+              onChange={handleOnTaskInputChange}
+            />
           </div>
 
           <div className="col-span-1">
@@ -127,8 +176,12 @@ const CreateEventPage = () => {
         </div>
 
         <div className="mt-4">
-          <TaskTable tableData={[]} onDelete={handleOnDeleteTaskData} />
+          <TaskTable tableData={taskData} onDelete={handleOnDeleteTaskData} />
         </div>
+
+        <Link href="/">
+          <Button className="w-full mt-6">Create Event !</Button>
+        </Link>
       </div>
     </div>
   );

@@ -30,6 +30,18 @@ interface TaskTableProps {
 }
 
 const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
+  const [selectedScheduleData, setSelectedScheduleData] = useState<ScheduleSlot>({
+    title: "",
+    start: "",
+    end: "",
+    place: "",
+    responsiblePeople: [],
+  });
+
+  const handleOnDialogInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedScheduleData({ ...selectedScheduleData, [event.target.id]: event.target.value });
+  };
+
   return (
     <div>
       <Table>
@@ -63,7 +75,13 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                     <div>
                       <Dialog>
                         <DialogTrigger asChild>
-                          <Button className="h-8 px-6" onClick={() => {}}>
+                          <Button
+                            className="h-8 px-6"
+                            id={"" + i}
+                            onClick={(event: React.MouseEvent<HTMLElement>) => {
+                              setSelectedScheduleData(tableData[Number(event.currentTarget.id)]);
+                            }}
+                          >
                             Edit
                           </Button>
                         </DialogTrigger>
@@ -73,27 +91,27 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                           </DialogHeader>
 
                           <div className="grid gap-4 py-4">
-                            {/* <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="name" className="text-right">
-                                Name
-                              </Label>
-                              <Input id="name" value="Pedro Duarte" className="col-span-3" />
-                            </div>
-                            <div className="grid grid-cols-4 items-center gap-4">
-                              <Label htmlFor="username" className="text-right">
-                                Username
-                              </Label>
-                              <Input id="username" value="@peduarte" className="col-span-3" />
-                            </div> */}
                             <div className="flex flex-col gap-4 w-full">
                               <div className="w-full items-center ">
                                 <Label htmlFor="scheduleStart">Start</Label>
-                                <Input type="text" id="scheduleStart" placeholder="(e.g. 12:00)" />
+                                <Input
+                                  type="text"
+                                  id="start"
+                                  placeholder="(e.g. 12:00)"
+                                  onChange={handleOnDialogInputChange}
+                                  value={selectedScheduleData.start}
+                                />
                               </div>
 
                               <div className="w-full items-center">
                                 <Label htmlFor="scheduleEnd">End</Label>
-                                <Input type="text" id="scheduleEnd" placeholder="(e.g. 12:00)" />
+                                <Input
+                                  type="text"
+                                  id="end"
+                                  placeholder="(e.g. 12:00)"
+                                  onChange={handleOnDialogInputChange}
+                                  value={selectedScheduleData.end}
+                                />
                               </div>
 
                               <div className="w-full items-center ">
@@ -102,12 +120,20 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                                   type="text"
                                   id="title"
                                   placeholder="(e.g. Hacking Time / Opening Ceremony)"
+                                  onChange={handleOnDialogInputChange}
+                                  value={selectedScheduleData.title}
                                 />
                               </div>
 
                               <div className="w-full items-center ">
                                 <Label htmlFor="place">Place</Label>
-                                <Input type="text" id="place" placeholder="(e.g. SBCx-plore)" />
+                                <Input
+                                  type="text"
+                                  id="place"
+                                  placeholder="(e.g. SBCx-plore)"
+                                  onChange={handleOnDialogInputChange}
+                                  value={selectedScheduleData.place}
+                                />
                               </div>
 
                               <div className="w-full items-center">
@@ -116,6 +142,8 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                                   type="text"
                                   id="responsiblePeople"
                                   placeholder="(e.g. Sila Tee)"
+                                  onChange={handleOnDialogInputChange}
+                                  value={selectedScheduleData.responsiblePeople.join(" ")}
                                 />
                               </div>
                             </div>
