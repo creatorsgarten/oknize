@@ -17,51 +17,38 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-interface ScheduleSlot {
-  id: number;
-  title: string;
-  start: string;
-  end: string;
-  place: string;
-  remark?: string | "";
-  responsiblePeople: string[];
-}
-
-const Schedule: ScheduleSlot[] = [
-  {
-    id: 1,
-    title: "Workshop",
-    start: "17:00",
-    end: "18:30",
-    place: "SCBx-Plore",
-    responsiblePeople: ["Thee", "Sila"],
-  },
-  {
-    id: 2,
-    title: "Dinner",
-    start: "18:30",
-    end: "19:30",
-    place: "Jitta Conference",
-    responsiblePeople: ["Pub"],
-  },
-  {
-    id: 3,
-    title: "Staff Evaluation",
-    start: "19:30",
-    end: "20:00",
-    place: "SDG Global",
-    responsiblePeople: ["New"],
-  },
-];
+import { useEffect, useState } from "react";
+import { subscribeSchedule } from "@/lib/db";
+import { ScheduleSlot, getCurrentSlot, getNextSlot } from "@/lib/schedule";
 
 export default function Home() {
+  const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
+  const [currentSlot, setCurrentSlot] = useState<ScheduleSlot | null>(null);
+  const [nextSlot, setNextSlot] = useState<ScheduleSlot | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeSchedule(
+      "ywc19",
+      (data: { agenda: ScheduleSlot[] }) => {
+        setScheduleSlots(data.agenda);
+
+        setCurrentSlot(getCurrentSlot(data.agenda));
+        setNextSlot(getNextSlot(data.agenda));
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
-    <main className={`flex min-h-screen flex-col items-center p-24 ${nunito.className}`}>
+    <main
+      className={`flex min-h-screen flex-col items-center p-24 ${nunito.className}`}
+    >
       <div className="grid grid-cols-5 items-center justify-between w-full gap-12">
         <Card className=" col-span-3 w-full">
           <CardHeader>
@@ -83,10 +70,20 @@ export default function Home() {
 
         <div className="col-span-2 flex flex-col gap-4 w-full">
           <h1>
-            Current Slot: <span className="text-xl font-bold">Staff Evaluation 19.30</span>
+            Current Slot:{" "}
+            <span className="text-xl font-bold">
+              {currentSlot
+                ? `${currentSlot.title} ${currentSlot.start}-${currentSlot.end}`
+                : "No Slot"}
+            </span>
           </h1>
           <h1>
-            Next Slot: <span className="text-xl font-bold">Staff Evaluation 19.30</span>
+            Next Slot:{" "}
+            <span className="text-xl font-bold">
+              {nextSlot
+                ? `${nextSlot.title} ${nextSlot.start}-${nextSlot.end}`
+                : "No Slot"}
+            </span>
           </h1>
         </div>
       </div>
@@ -105,24 +102,7 @@ export default function Home() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">0</TableCell>
-              <TableCell>10:00</TableCell>
-              <TableCell>11:00</TableCell>
-              <TableCell>Lunch</TableCell>
-              <TableCell>Thee</TableCell>
-
-              <TableCell>
-                <div className="flex flex-row items-center gap-4">
-                  <Button className="h-8 px-6">Edit</Button>
-                  <Button className="h-8 px-6" variant="destructive">
-                    Delete
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-
-            {Schedule.map((data) => {
+            {ScheduleSlots.map((data) => {
               return (
                 <TableRow key={data.id}>
                   <TableCell className="font-medium">{data.id}</TableCell>
