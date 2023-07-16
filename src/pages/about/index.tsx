@@ -1,3 +1,4 @@
+import Footer from "@/components/footer/Footer";
 import Navbar from "@/components/navbar/Navbar";
 import Link from "next/link";
 
@@ -32,7 +33,7 @@ const About = () => {
           </p>
           <p>&quot;เพราะการมีอีเวนต์ คือการบ่งบอกความเป็นมนุษย์&quot;</p>
         </div>
-        <div className="flex flex-col justify-center items-center gap-8 text-xl mx-auto max-w-3xl p-6 pt-10 lg:p-16">
+        <div className="flex flex-col justify-center items-center gap-8 text-xl mx-auto max-w-3xl p-6 pt-10 lg:p-16 lg:pb-4">
           <h1 className="text-3xl px-4 font-semibold">🏃🏻 ก้าวต่อไปของเรา</h1>
           <p>
             👌🏻 oknize (โอ-เค-ไนซ์) เป็นแพลตฟอร์มของคนทำอีเวนต์
@@ -60,6 +61,7 @@ const About = () => {
           </h3>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

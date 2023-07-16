@@ -44,12 +44,12 @@ export default function ProgressBar({
         <span className="text-neutral-500">{currentSlot?.end}</span>
       </div>
 
-      <div className="w-64 h-2 bg-gray-200 rounded-full">
+      <div className="w-64 h-3 bg-gray-200 rounded-full">
         <div
           style={{
             width: `${progress}%`,
           }}
-          className="h-2 bg-purple-500 rounded-full"
+          className="h-3 bg-purple-500 rounded-full"
         ></div>
       </div>
     </div>
