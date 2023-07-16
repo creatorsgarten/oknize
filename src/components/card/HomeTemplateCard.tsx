@@ -18,11 +18,11 @@ const HomeTemplateCard: React.FC<HomeTemplateCardProps> = ({ blankTemplate = fal
     return (
       <Card className="shadow">
         <CardContent className="p-4">
-          <div className="w-44">
-            <div className="border border-dashed border-gray-300 h-36 flex items-center justify-center p-8 rounded-lg">
+          <div className="w-44 md:w-60">
+            <div className="border border-dashed border-gray-300 h-36 md:h-40 flex items-center justify-center p-8 rounded-lg">
               <Plus size={36} />
             </div>
-            <div className="mt-2 text-sm font-medium text-[#1B2559]">Blank</div>
+            <div className="mt-4 text-sm font-medium text-[#1B2559]">Blank</div>
           </div>
         </CardContent>
       </Card>
@@ -31,8 +31,8 @@ const HomeTemplateCard: React.FC<HomeTemplateCardProps> = ({ blankTemplate = fal
     return (
       <Card className="shadow">
         <CardContent className="p-4">
-          <div className="w-44">
-            <div className="flex items-center h-36 justify-center rounded-lg">
+          <div className="w-44 md:w-60">
+            <div className="flex items-center h-36 md:h-40 justify-center rounded-lg">
               <Image
                 src={"/images/template/CardTemplate.png"}
                 alt="Card Template Banner"
@@ -41,7 +41,7 @@ const HomeTemplateCard: React.FC<HomeTemplateCardProps> = ({ blankTemplate = fal
                 className="w-full h-full"
               />
             </div>
-            <div className="mt-2 text-sm font-medium text-[#1B2559]">Template</div>
+            <div className="mt-4 text-sm font-medium text-[#1B2559]">Template</div>
             <div className="mt-2 text-xs font-medium text-gray-500 flex-wrap">
               Lorem ipsum dolor sit amet consectetur.
             </div>

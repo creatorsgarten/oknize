@@ -1,13 +1,14 @@
 import CardCarousel from "@/components/CardCarousel";
 import HomeTemplateCard from "@/components/card/HomeTemplateCard";
 import { DatePickerWithRange } from "@/components/input/DatePickerWithRange";
-import { DataTable, DataTableDemo } from "@/components/table/DataTable";
+import { DataTable, DesktopDataTable } from "@/components/table/DataTable";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ListFilter, Search } from "lucide-react";
+import { ArrowLeft, ArrowRight, ListFilter, Search } from "lucide-react";
 
 const HomePage = () => {
   return (
-    <div className="px-4 py-8 max-w-screen">
+    <div className="px-4 py-8 pb-0 md:max-w-screen-lg md:mx-auto">
       <div className="font-lg text-lg">Event Managment</div>
       <div className=" text-gray-500">Lorem ipsum dolor sit amet consectetur.</div>
 
@@ -36,7 +37,23 @@ const HomePage = () => {
       </div>
 
       <div className="mt-6">
-        <DataTable />
+        <div className="block md:hidden">
+          <DataTable />
+        </div>
+
+        <div className="hidden md:block">
+          <DesktopDataTable />
+        </div>
+
+        <div className="flex flex-row items-center justify-between mt-4">
+          <Button variant={"ghost"}>
+            <ArrowLeft color="#667085" />
+          </Button>
+          <div className="text-gray-700 text-sm">Page 1 of 10</div>
+          <Button variant={"ghost"}>
+            <ArrowRight color="#667085" />
+          </Button>
+        </div>
       </div>
     </div>
   );
