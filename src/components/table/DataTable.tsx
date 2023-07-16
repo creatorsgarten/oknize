@@ -76,7 +76,7 @@ export function DataTable() {
           <TableBody>
             {EVENTS.map((event, index) => {
               return (
-                <TableRow key={index}>
+                <TableRow key={index} onClick={() => (window.location.href = "/event/12345")}>
                   <TableCell>
                     <Checkbox />
                   </TableCell>

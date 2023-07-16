@@ -14,11 +14,9 @@ function useProgress(currentTime: string, currentSlot: ScheduleSlot | null) {
       const [endHour, endMin] = currentSlot?.end.split(":");
 
       const totalSlotTime =
-        (parseInt(endHour) - parseInt(startHour)) * 60 +
-        (parseInt(endMin) - parseInt(startMin));
+        (parseInt(endHour) - parseInt(startHour)) * 60 + (parseInt(endMin) - parseInt(startMin));
       const totalCurrentTime =
-        (parseInt(currHour) - parseInt(startHour)) * 60 +
-        (parseInt(currMin) - parseInt(startMin));
+        (parseInt(currHour) - parseInt(startHour)) * 60 + (parseInt(currMin) - parseInt(startMin));
 
       setProgress((totalCurrentTime / totalSlotTime) * 100);
     }
@@ -44,7 +42,7 @@ export default function ProgressBar({
         <span className="text-neutral-500">{currentSlot?.end}</span>
       </div>
 
-      <div className="w-64 h-3 bg-gray-200 rounded-full">
+      <div className="w-48 sm:w-64 h-3 bg-gray-200 rounded-full">
         <div
           style={{
             width: `${progress}%`,
