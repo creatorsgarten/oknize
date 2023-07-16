@@ -6,6 +6,7 @@ import { Nunito, Noto_Sans_Thai } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer/Footer";
 import Head from "next/head";
+import Sidebar from "@/components/sidebar/Sidebar";
 
 const nunito = Nunito({ subsets: ["latin"] });
 const notosansthai = Noto_Sans_Thai({ subsets: ["thai"] });
@@ -19,9 +20,24 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>OKNIZE</title>
       </Head>
 
-      {router.pathname !== "/create" && <Navbar />}
-      <Component {...pageProps} />
-      {router.pathname !== "/create" && <Footer />}
+      {/* {router.pathname !== "/create" && <Navbar />} */}
+
+      <div className="hidden md:block">
+        <div className="grid grid-cols-12">
+          <div className="col-span-2">
+            <Sidebar />
+          </div>
+          <div className="col-span-10">
+            <Component {...pageProps} />
+          </div>
+        </div>
+      </div>
+
+      <div className="block md:hidden">
+        {router.pathname !== "/create" && <Navbar />}
+        <Component {...pageProps} />
+        {router.pathname !== "/create" && <Footer />}
+      </div>
     </div>
   );
 }
