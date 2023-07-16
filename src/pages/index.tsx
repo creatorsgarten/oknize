@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { Button } from "../components/ui/button";
+import Image from "next/image";
 
 const Feature = () => {
   return (
@@ -21,6 +22,7 @@ const Landing = () => {
 
   return (
     <div>
+      <Navbar />
       <section>
         <div className="p-10 flex flex-col gap-6 justify-center items-center sm:p-16">
           <div className="flex flex-col gap-2">
@@ -44,6 +46,16 @@ const Landing = () => {
           </div>
         </div>
       </section>
+
+      <section className="py-4">
+        <Image
+          src="/assets/product.png"
+          width={1920}
+          height={1080}
+          alt="product ของเรา"
+        />
+      </section>
+
       <section className="py-4">
         <div className="flex flex-col justify-center items-center gap-4">
           <div className="px-10 lg:px-16 flex flex-col justify-center items-center gap-4">
