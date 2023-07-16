@@ -24,10 +24,20 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <div className="hidden md:block">
         <div className="grid grid-cols-12">
-          <div className="col-span-2">
-            <Sidebar />
-          </div>
-          <div className="col-span-10">
+          {router.pathname !== "/" && router.pathname !== "/about" ? (
+            <div className="col-span-2">
+              <Sidebar />
+            </div>
+          ) : (
+            <div></div>
+          )}
+          <div
+            className={
+              router.pathname !== "/" && router.pathname !== "/about"
+                ? `col-span-10`
+                : "col-span-12"
+            }
+          >
             <Component {...pageProps} />
           </div>
         </div>
