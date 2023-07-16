@@ -169,16 +169,18 @@ const TaskTable: React.FC<TaskTableProps> = ({
                           </div>
 
                           <DialogFooter>
-                            <Button
-                              onClick={() => {
-                                onSave(selectedScheduleData);
+                            <DialogClose>
+                              <Button
+                                onClick={() => {
+                                  onSave(selectedScheduleData);
 
-                                // close modal
-                              }}
-                              type="submit"
-                            >
-                              <DialogClose>Save changes</DialogClose>
-                            </Button>
+                                  // close modal
+                                }}
+                                type="submit"
+                              >
+                                Save changes
+                              </Button>
+                            </DialogClose>
                           </DialogFooter>
                         </DialogContent>
                       </Dialog>
