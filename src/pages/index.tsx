@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { Button } from "../components/ui/button";
 import Image from "next/image";
+import Navbar from "@/components/navbar/Navbar";
 
 const Feature = () => {
   return (
@@ -48,12 +49,7 @@ const Landing = () => {
       </section>
 
       <section className="py-4">
-        <Image
-          src="/assets/product.png"
-          width={1920}
-          height={1080}
-          alt="product ของเรา"
-        />
+        <Image src="/assets/product.png" width={1920} height={1080} alt="product ของเรา" />
       </section>
 
       <section className="py-4">
