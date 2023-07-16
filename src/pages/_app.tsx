@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { Nunito, Noto_Sans_Thai } from "next/font/google";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/footer/Footer";
 
 const nunito = Nunito({ subsets: ["latin"] });
 const notosansthai = Noto_Sans_Thai({ subsets: ["thai"] });
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <div className={notosansthai.className}>
       {router.pathname !== "/create" && <Navbar />}
       <Component {...pageProps} />
+      {router.pathname !== "/create" && <Footer />}
     </div>
   );
 }

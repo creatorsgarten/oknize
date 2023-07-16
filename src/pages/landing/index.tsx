@@ -3,7 +3,7 @@ import { Button } from "../../components/ui/button";
 const Feature = () => {
   return (
     <div className="flex flex-col justify-center items-center gap-2">
-      <div className="bg-purple-100 rounded-full aspect-square h-8 flex items-center justify-center">
+      <div className="bg-purple-100 text-4xl rounded-full aspect-square p-4 flex items-center justify-center">
         K
       </div>
       <h6 className="text-lg">Lorem Ipsum Dolor.</h6>
@@ -19,13 +19,13 @@ const Landing = () => {
   return (
     <div>
       <section>
-        <div className="flex flex-col gap-6 justify-center items-center p-16">
+        <div className="p-10 flex flex-col gap-6 justify-center items-center sm:p-16">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl text-center">
               จัดอีเวนต์ให้ <span className="font-semibold">nice</span> ด้วย{" "}
               <span className="font-semibold">oknize 👌🏻</span>
             </h1>
-            <h4 className="text-xl text-neutral-500 text-center">
+            <h4 className="text-lg sm:text-xl text-neutral-500 text-center">
               แพลตฟอร์มและชุดเครื่องมือ ออกแบบโดยนักจัดอีเวนต์
               เพื่อนักจัดอีเวนต์
             </h4>
@@ -81,7 +81,7 @@ const Landing = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 px-8 lg:px-0">
             <div className="flex flex-col justify-center items-center gap-3">
-              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+              <div className="bg-purple-100 rounded-full aspect-square text-4xl p-4 border border-purple-200 flex items-center justify-center">
                 📅
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">
@@ -90,7 +90,7 @@ const Landing = () => {
               </h6>
             </div>
             <div className="flex flex-col justify-center items-center gap-3">
-              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+              <div className="bg-purple-100 rounded-full aspect-square text-4xl p-4 border border-purple-200 flex items-center justify-center">
                 🗄️
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">
@@ -99,7 +99,7 @@ const Landing = () => {
               </h6>
             </div>
             <div className="flex flex-col justify-center items-center gap-3">
-              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+              <div className="bg-purple-100 text-4xl p-4 rounded-full aspect-square border border-purple-200 flex items-center justify-center">
                 📑
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">
@@ -108,7 +108,7 @@ const Landing = () => {
               </h6>
             </div>
             <div className="flex flex-col justify-center items-center gap-3">
-              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+              <div className="bg-purple-100 rounded-full aspect-square text-4xl p-4 border border-purple-200 flex items-center justify-center">
                 📱
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">

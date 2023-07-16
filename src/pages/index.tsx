@@ -39,11 +39,6 @@ export default function Home() {
     };
   }, []);
 
-  function updateInterval() {
-    setCurrentSlot(getCurrentSlot(ScheduleSlots));
-    setNextSlot(getNextSlot(ScheduleSlots));
-  }
-
   const handleOnDeleteTaskData = (data: ScheduleSlot) => {
     deleteTask("ywc19", ScheduleSlots, data);
   };
@@ -53,6 +48,11 @@ export default function Home() {
   };
 
   useEffect(() => {
+    function updateInterval() {
+      setCurrentSlot(getCurrentSlot(ScheduleSlots));
+      setNextSlot(getNextSlot(ScheduleSlots));
+    }
+
     const interval = setInterval(() => {
       var today = new Date();
       var now = today.toLocaleTimeString("th-TH");
@@ -63,7 +63,7 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
-  }, [updateInterval]);
+  }, []);
 
   return (
     <main
