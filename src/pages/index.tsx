@@ -5,7 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/footer/Footer";
 
-const Feature = ({ name, icon, desc }: { name: string; icon: string; desc: string }) => {
+const Feature = ({
+  name,
+  icon,
+  desc,
+}: {
+  name: string;
+  icon: string;
+  desc: string;
+}) => {
   return (
     <div className="flex flex-col justify-center items-center gap-2">
       <div className="bg-purple-100 text-4xl h-16 w-16 rounded-full aspect-square p-4 flex items-center justify-center border border-purple-200">
@@ -31,7 +39,8 @@ const Landing = () => {
               <span className="font-semibold">oknize 👌🏻</span>
             </h1>
             <h4 className="text-lg sm:text-xl text-neutral-500 text-center">
-              แพลตฟอร์มและชุดเครื่องมือ ออกแบบโดยผู้จัดอีเวนต์ เพื่อผู้จัดอีเวนต์
+              แพลตฟอร์มและชุดเครื่องมือ ออกแบบโดยผู้จัดอีเวนต์
+              เพื่อผู้จัดอีเวนต์
             </h4>
           </div>
           <div>
@@ -48,7 +57,12 @@ const Landing = () => {
       </section>
 
       <section className="py-4">
-        <Image src="/assets/product.png" width={1920} height={1080} alt="product ของเรา" />
+        <Image
+          src="/assets/product.png"
+          width={1920}
+          height={1080}
+          alt="product ของเรา"
+        />
       </section>
 
       <section className="py-4">
@@ -59,8 +73,8 @@ const Landing = () => {
               เราจะช่วยให้การจัดอีเวนต์สะดวกขึ้นได้อย่างไร
             </h1>
             <h6 className="text-center text-gray-500 max-w-2xl">
-              Powerful, self-serve product and growth analytics to help you convert, engage, and
-              retain more users. Trusted by over 4,000 startups.
+              โซลูชั่นที่ถูกออกแบบโดยยึดพื้นฐานจาก Pain Point
+              ของนักจัดอีเวนต์หลากหลายกลุ่ม หลากหลายสาย
             </h6>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-12 pt-8 pb-16">
@@ -87,16 +101,19 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section className="bg-gray-50 p-8 flex flex-col justify-center items-center py- lg:py-16 gap-6 lg:gap-8 border-y border-gray-200">
+      <section className="bg-gray-50 p-8 flex flex-col justify-center items-centerç gap-6 lg:gap-8 border-y border-gray-200">
         <h1 className="text-2xl lg:text-4xl text-center max-w-3xl">
-          จัดอีเวนต์สนุก เพื่อนชอบ ลูกค้าชอบ ทุกระดับประทับใจ ไม่ต้องปวดหัวกับปัญหายิบย่อยวุ่นวาย 🔥
+          จัดอีเวนต์สนุก เพื่อนชอบ ลูกค้าชอบ ทุกระดับประทับใจ
+          ไม่ต้องปวดหัวกับปัญหายิบย่อยวุ่นวาย 🔥
         </h1>
         <div className="flex flex-col justify-center items-center">
           <div className="h-12 rounded-full aspect-square bg-purple-500 overflow-hidden">
             <Image src="/nutpinyo.jpg" alt="" width="48" height="48" />
           </div>
           <h6 className="text-base pt-4">ณัฐ ภิญโญ</h6>
-          <p className="text-gray-500 text-sm">Senior Advisor / Ex-president, Thinc.</p>
+          <p className="text-gray-500 text-sm">
+            Senior Advisor / Ex-president, Thinc.
+          </p>
         </div>
       </section>
       <section>
@@ -105,7 +122,9 @@ const Landing = () => {
             <h1 className="text-3xl lg:text-4xl text-center">
               เกิดมาเพื่ออีเวนต์ และคนจัดอีเวนต์เท่านั้น
             </h1>
-            <h3 className="text-gray-700 text-2xl">คุณเคยเจอปัญหานี้หรือไม่:</h3>
+            <h3 className="text-gray-700 text-2xl">
+              คุณเคยเจอปัญหานี้หรือไม่:
+            </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 px-8 lg:px-0">
             <div className="flex flex-col justify-center items-center gap-3">
@@ -122,7 +141,8 @@ const Landing = () => {
                 🗄️
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">
-                ใช้ notion ทำรายละเอียดอีเวนต์​ แต่นานเข้าโครงสร้างข้อมูลก็บวมจนหาไม่เจอ
+                ใช้ notion ทำรายละเอียดอีเวนต์​
+                แต่นานเข้าโครงสร้างข้อมูลก็บวมจนหาไม่เจอ
               </h6>
             </div>
             <div className="flex flex-col justify-center items-center gap-3">
@@ -138,8 +158,8 @@ const Landing = () => {
                 📱
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">
-                รัน operation วันงานด้วยกระดาษและ messaging app แต่ก็ out-of-sync
-                จนต้องนัดบรีฟออฟไลน์กันบ่อยครั้งจนเสียเวลา
+                รัน operation วันงานด้วยกระดาษและ messaging app แต่ก็
+                out-of-sync จนต้องนัดบรีฟออฟไลน์กันบ่อยครั้งจนเสียเวลา
               </h6>
             </div>
           </div>
@@ -157,6 +177,54 @@ const Landing = () => {
             <h3 className="text-purple-600 text-lg max-w-3xl text-center pt-3 font-semibold">
               <Link href="/about">🙋🏻 เกี่ยวกับเรา &gt;</Link>
             </h3>
+          </div>
+        </div>
+      </section>
+      <section className="bg-purple-50 grid grid-cols-1 md:grid-cols-3 gap-8 p-8 lg:px-32 md:gap-16 border border-purple-200">
+        <div className="flex flex-col bg-white border border-gray-200 rounded-lg p-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-semibold">Personal</h1>
+            <h3 className="text-lg">0 THB/mth</h3>
+          </div>
+          <div className="mt-2">
+            <h4 className="font-medium mb-1">Including:</h4>
+            <ul className="flex flex-col gap-1 list-disc list-inside">
+              <li>Agenda</li>
+              <li>Sequence</li>
+              <li>Budget Plan</li>
+              <li>Automatic Rundown</li>
+              <li>Starter Template</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col bg-white border border-gray-200 rounded-lg p-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-semibold">Enterprise</h1>
+            <h3 className="text-lg">259 THB/mth</h3>
+          </div>
+          <div className="mt-2">
+            <h4 className="font-medium mb-1">Including:</h4>
+            <ul className="flex flex-col gap-1 list-disc list-inside">
+              <li>Unlimited Template</li>
+              <li>Free Document Template</li>
+              <li>Add your logo</li>
+              <li>Connect with Supplier</li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex flex-col bg-white border border-gray-200 rounded-lg p-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-semibold">Pro</h1>
+            <h3 className="text-lg">From 8499 THB/mth</h3>
+          </div>
+          <div className="mt-2">
+            <h4 className="font-medium mb-1">Including:</h4>
+            <ul className="flex flex-col gap-1 list-disc list-inside">
+              <li>Customization</li>
+              <li>Event Consultant</li>
+              <li>Man power service</li>
+              <li>Support team</li>
+            </ul>
           </div>
         </div>
       </section>
