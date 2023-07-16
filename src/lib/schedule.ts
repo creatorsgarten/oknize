@@ -1,4 +1,5 @@
 export interface ScheduleSlot {
+  id: string;
   title: string;
   start: string;
   end: string;
@@ -82,8 +83,7 @@ export function addTaskToSchedule(
 ) {
   // update
   // add first then sort schedule
-}
+  const newSchedule = [...schedule, newTask];
 
-export function deleteTask() {
-  // delete
+  return sortSchedule(newSchedule);
 }

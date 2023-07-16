@@ -11,7 +11,7 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  DialogClose,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -26,20 +26,32 @@ import { useState } from "react";
 
 interface TaskTableProps {
   tableData: ScheduleSlot[];
-  onDelete: () => void;
+  onSave: (data: ScheduleSlot) => void;
+  onDelete: (data: ScheduleSlot) => void;
 }
 
-const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
-  const [selectedScheduleData, setSelectedScheduleData] = useState<ScheduleSlot>({
-    title: "",
-    start: "",
-    end: "",
-    place: "",
-    responsiblePeople: [],
-  });
+const TaskTable: React.FC<TaskTableProps> = ({
+  tableData,
+  onSave,
+  onDelete,
+}) => {
+  const [selectedScheduleData, setSelectedScheduleData] =
+    useState<ScheduleSlot>({
+      title: "",
+      start: "",
+      id: "",
+      end: "",
+      place: "",
+      responsiblePeople: [],
+    });
 
-  const handleOnDialogInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedScheduleData({ ...selectedScheduleData, [event.target.id]: event.target.value });
+  const handleOnDialogInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSelectedScheduleData({
+      ...selectedScheduleData,
+      [event.target.id]: event.target.value,
+    });
   };
 
   return (
@@ -79,7 +91,9 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                             className="h-8 px-6"
                             id={"" + i}
                             onClick={(event: React.MouseEvent<HTMLElement>) => {
-                              setSelectedScheduleData(tableData[Number(event.currentTarget.id)]);
+                              setSelectedScheduleData(
+                                tableData[Number(event.currentTarget.id)]
+                              );
                             }}
                           >
                             Edit
@@ -137,13 +151,17 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                               </div>
 
                               <div className="w-full items-center">
-                                <Label htmlFor="responsiblePeople">Responsible People</Label>
+                                <Label htmlFor="responsiblePeople">
+                                  Responsible People
+                                </Label>
                                 <Input
                                   type="text"
                                   id="responsiblePeople"
                                   placeholder="(e.g. Sila Tee)"
                                   onChange={handleOnDialogInputChange}
-                                  value={selectedScheduleData.responsiblePeople.join(" ")}
+                                  value={selectedScheduleData.responsiblePeople.join(
+                                    " "
+                                  )}
                                 />
                               </div>
                             </div>
@@ -151,13 +169,28 @@ const TaskTable: React.FC<TaskTableProps> = ({ tableData, onDelete }) => {
                           </div>
 
                           <DialogFooter>
-                            <Button type="submit">Save changes</Button>
+                            <Button
+                              onClick={() => {
+                                onSave(selectedScheduleData);
+
+                                // close modal
+                              }}
+                              type="submit"
+                            >
+                              <DialogClose>Save changes</DialogClose>
+                            </Button>
                           </DialogFooter>
                         </DialogContent>
                       </Dialog>
                     </div>
 
-                    <Button className="h-8 px-6" variant="destructive" onClick={onDelete}>
+                    <Button
+                      className="h-8 px-6"
+                      variant="destructive"
+                      onClick={() => {
+                        onDelete(selectedScheduleData);
+                      }}
+                    >
                       Delete
                     </Button>
                   </div>

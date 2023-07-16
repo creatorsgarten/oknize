@@ -36,6 +36,7 @@ const CreateEventPage = () => {
     title: "",
     start: "",
     end: "",
+    id: "",
     place: "",
     responsiblePeople: "",
   });
@@ -43,7 +44,9 @@ const CreateEventPage = () => {
   const [taskData, setTaskData] = useState<ScheduleSlot[]>([]);
   const [test, setTest] = useState("");
 
-  const handleOnTaskInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnTaskInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setScheduleData({ ...scheduleData, [event.target.id]: event.target.value });
   };
 
@@ -57,12 +60,14 @@ const CreateEventPage = () => {
       title: "",
       start: "",
       end: "",
+      id: "",
       place: "",
       responsiblePeople: "",
     });
   };
 
   const handleOnDeleteTaskData = () => {};
+  const handleSaveChanges = () => {};
 
   return (
     <div className="p-6 px-12">
@@ -109,7 +114,9 @@ const CreateEventPage = () => {
       <div className="mt-6">
         <div className="font-bold text-xl">Event task schedule</div>
         <div className=" text-neutral-400 font-sm">
-          {"Planning a schedule and assign people who responsible on that task."}
+          {
+            "Planning a schedule and assign people who responsible on that task."
+          }
         </div>
       </div>
 
@@ -176,7 +183,11 @@ const CreateEventPage = () => {
         </div>
 
         <div className="mt-4">
-          <TaskTable tableData={taskData} onDelete={handleOnDeleteTaskData} />
+          <TaskTable
+            tableData={taskData}
+            onSave={handleSaveChanges}
+            onDelete={handleOnDeleteTaskData}
+          />
         </div>
 
         <Link href="/">

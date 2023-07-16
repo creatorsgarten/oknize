@@ -2,11 +2,6 @@ import { Nunito } from "next/font/google";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
-const isSupported = () =>
-  "Notification" in window &&
-  "serviceWorker" in navigator &&
-  "PushManager" in window;
-
 import {
   Card,
   CardContent,
@@ -15,8 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useEffect, useState } from "react";
-import { subscribeSchedule } from "@/lib/db";
-import { ScheduleSlot, getCurrentSlot, getNextSlot } from "@/lib/schedule";
+import { deleteTask, editTask, subscribeSchedule } from "@/lib/db";
+import {
+  ScheduleSlot,
+  getCurrentSlot,
+  getNextSlot,
+  sortSchedule,
+} from "@/lib/schedule";
 import CurrentTime from "@/components/time/CurrentTime";
 
 import TaskTable from "@/components/table/TaskTable";
@@ -46,6 +46,14 @@ export default function Home() {
     setCurrentSlot(getCurrentSlot(ScheduleSlots));
     setNextSlot(getNextSlot(ScheduleSlots));
   }
+
+  const handleOnDeleteTaskData = (data: ScheduleSlot) => {
+    deleteTask("ywc19", ScheduleSlots, data);
+  };
+
+  const handleSaveChanges = (data: ScheduleSlot) => {
+    editTask("ywc19", ScheduleSlots, data);
+  };
 
   return (
     <main
@@ -91,7 +99,11 @@ export default function Home() {
       </div>
 
       <div className="mt-8 w-full">
-        <TaskTable tableData={ScheduleSlots} onDelete={() => {}} />
+        <TaskTable
+          tableData={ScheduleSlots}
+          onSave={handleSaveChanges}
+          onDelete={handleOnDeleteTaskData}
+        />
       </div>
     </main>
   );

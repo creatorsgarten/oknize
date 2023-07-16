@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className="p-4 border-b-1 border flex flex-row justify-between items-center">
       <Link className="text-2xl font-medium" href={"/"}>
-        👌🏻 Okanize
+        👌🏻 oknize
       </Link>
 
       <Link href={"/create"}>

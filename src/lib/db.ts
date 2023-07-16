@@ -11,6 +11,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import firebaseApp from "./firebase";
+import { ScheduleSlot, sortSchedule } from "./schedule";
 
 const db = getFirestore(firebaseApp);
 
@@ -36,12 +37,52 @@ export function subscribeSchedule(uid: string, callback: Function) {
 }
 
 // add
-export async function addTask(uid: string, task: DocumentData) {
-  // sor ttask first then update
+export async function addTask(
+  uid: string,
+  schedule: ScheduleSlot[],
+  task: ScheduleSlot
+) {
+  // sort task first then update
+  const scheduleWithNewTask = sortSchedule([...schedule, task]);
+
+  const scheduleRef = getScheduleRef(uid);
+  await setDoc(scheduleRef, { agenda: scheduleWithNewTask }, { merge: true });
 }
 
-export async function deleteTask(uid: string, task: DocumentData) {
+// edit
+export async function editTask(
+  uid: string,
+  schedule: ScheduleSlot[],
+  task: ScheduleSlot
+) {
+  //  sort task then update
+  const scheduleWithEditedTask = schedule.map((slot) => {
+    if (slot.id === task.id) {
+      return task;
+    } else {
+      return slot;
+    }
+  });
+
+  const scheduleRef = getScheduleRef(uid);
+
+  await setDoc(
+    scheduleRef,
+    { agenda: scheduleWithEditedTask },
+    { merge: true }
+  );
+}
+
+export async function deleteTask(
+  uid: string,
+  schedule: ScheduleSlot[],
+  task: ScheduleSlot
+) {
   //  filter task then update
+  const filteredchedule = schedule.filter((slot) => slot.id !== task.id);
+
+  const scheduleRef = getScheduleRef(uid);
+  await setDoc(scheduleRef, { agenda: filteredchedule }, { merge: true });
 }
 
 // udpate
