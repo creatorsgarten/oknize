@@ -1,3 +1,4 @@
+import Navbar from "@/components/navbar/Navbar";
 import { Button } from "../components/ui/button";
 
 const Feature = () => {
@@ -18,6 +19,7 @@ const Feature = () => {
 const Landing = () => {
   return (
     <div>
+      <Navbar />
       <section>
         <div className="p-10 flex flex-col gap-6 justify-center items-center sm:p-16">
           <div className="flex flex-col gap-2">

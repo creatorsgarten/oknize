@@ -18,8 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>OKNIZE</title>
       </Head>
-
-      {router.pathname !== "/create" && <Navbar />}
       <Component {...pageProps} />
       {router.pathname !== "/create" && <Footer />}
     </div>

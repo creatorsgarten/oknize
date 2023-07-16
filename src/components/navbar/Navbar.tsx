@@ -12,12 +12,11 @@ const Navbar = () => {
         </div>
       </Link>
 
-      <Link href={"/create"}>
-        <Button>
-          <PlusCircle className="mr-2 h-4 w-4" />
-          Create New Event
-        </Button>
-      </Link>
+      {/* <Link href={"/event"}>
+        <button className="bg-purple-600 shadow-md py-2 px-8 rounded-lg text-white transition-all duration-500 hover:bg-purple-700 hover:shadow-lg">
+          เข้าใช้งาน
+        </button>
+      </Link> */}
     </nav>
   );
 };
