@@ -44,9 +44,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </div>
 
       <div className="block md:hidden">
-        {router.pathname !== "/create" && <Navbar />}
+        {!["/create", "/", "/about".includes(router.pathname)] && <Navbar />}
         <Component {...pageProps} />
-        {router.pathname !== "/create" && <Footer />}
+        {!["/create", "/", "/about".includes(router.pathname)] && <Footer />}
       </div>
     </div>
   );
