@@ -173,7 +173,7 @@ const Landing = () => {
               👌🏻 okmize ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
               เพื่อสร้างเครื่องมือที่เป็นมิตรต่อกลุ่มผู้จัดอีเวนต์มากที่สุด
             </h3>
-            <h3 className="text-purple-600 text-lg max-w-3xl text-center pt-3">
+            <h3 className="text-purple-600 text-lg max-w-3xl text-center pt-3 font-semibold">
               <a href="/about">🙋🏻 เกี่ยวกับเรา &gt;</a>
             </h3>
           </div>
