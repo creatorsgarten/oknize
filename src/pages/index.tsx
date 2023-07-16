@@ -74,8 +74,8 @@ export default function Home() {
     <main
       className={`flex min-h-screen flex-col items-center p-12 ${nunito.className}`}
     >
-      <div className="grid grid-cols-5 items-center justify-between w-full gap-12">
-        <Card className=" col-span-3 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-5 items-center justify-between w-full gap-12">
+        <Card className="order-last md:col-span-3 md:order-first w-full">
           <CardHeader>
             <CardTitle>Young Webmaster Camp 19th (YWC19)</CardTitle>
             <CardDescription>
@@ -90,7 +90,7 @@ export default function Home() {
           </CardContent>
         </Card>
 
-        <div className="col-span-2 flex flex-col gap-6 w-full items-center">
+        <div className="order-first md:col-span-2 md:order-last flex flex-col gap-6 w-full items-center">
           <h1 className="flex flex-row gap-2 items-baseline text-neutral-500">
             Current Time
           </h1>
