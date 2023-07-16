@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar/Navbar";
 import { Button } from "../components/ui/button";
+import Image from "next/image";
 
 const Feature = () => {
   return (
@@ -33,10 +34,22 @@ const Landing = () => {
             </h4>
           </div>
           <div>
-            <Button className="bg-purple-500">ลองใช้เลย!</Button>
+            <button className="px-8 py-3 shadow-md rounded-lg bg-purple-500 text-white duration-500 transition-all hover:shadow-xl">
+              ลองใช้เลย!
+            </button>
           </div>
         </div>
       </section>
+
+      <section className="py-4">
+        <Image
+          src="/assets/product.png"
+          width={1920}
+          height={1080}
+          alt="product ของเรา"
+        />
+      </section>
+
       <section className="py-4">
         <div className="flex flex-col justify-center items-center gap-4">
           <div className="px-10 lg:px-16 flex flex-col justify-center items-center gap-4">
