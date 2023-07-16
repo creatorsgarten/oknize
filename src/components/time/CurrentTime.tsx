@@ -1,24 +1,9 @@
 import { useState, useEffect } from "react";
 
-const CurrentTime = ({ updateInterval }: { updateInterval: () => void }) => {
-  const [currentTime, setCurrentTime] = useState("");
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      var today = new Date();
-      var now = today.toLocaleTimeString("th-TH");
-      setCurrentTime(now);
-
-      updateInterval();
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [updateInterval]);
-
+const CurrentTime = ({ currentTime }: { currentTime: string }) => {
   return (
     <div>
-      <span className="text-xl font-bold">{currentTime}</span>
+      <span className="text-4xl text-center font-bold">{currentTime}</span>
     </div>
   );
 };
