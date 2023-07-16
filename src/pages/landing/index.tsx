@@ -22,7 +22,8 @@ const Landing = () => {
         <div className="flex flex-col gap-6 justify-center items-center p-16">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl text-center">
-              จัดอีเวนต์ให้ &quot;ไนซ์&quot; ด้วย &quot;โอเคไนซ์ 👌🏻&quot;
+              จัดอีเวนต์ให้ <span className="font-semibold">nice</span> ด้วย{" "}
+              <span className="font-semibold">oknize 👌🏻</span>
             </h1>
             <h4 className="text-xl text-neutral-500 text-center">
               แพลตฟอร์มและชุดเครื่องมือ ออกแบบโดยนักจัดอีเวนต์
