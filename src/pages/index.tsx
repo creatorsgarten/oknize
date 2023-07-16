@@ -3,6 +3,7 @@ import { Button } from "../components/ui/button";
 import Navbar from "@/components/navbar/Navbar";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@/components/footer/Footer";
 
 const Feature = ({ name, icon, desc }: { name: string; icon: string; desc: string }) => {
   return (
@@ -159,6 +160,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
