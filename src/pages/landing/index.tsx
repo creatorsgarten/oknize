@@ -34,7 +34,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className="py-4">
         <div className="flex flex-col justify-center items-center gap-4">
           <div className="px-10 lg:px-16 flex flex-col justify-center items-center gap-4">
             <h4 className="text-lg text-purple-500 text-center">คุณสมบัติ</h4>
@@ -47,7 +47,7 @@ const Landing = () => {
               startups.
             </h6>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-8 pb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-12 pt-8 pb-16">
             <Feature />
             <Feature />
             <Feature />
@@ -55,7 +55,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section className="bg-gray-50 p-8 flex flex-col justify-center items-center py- lg:py-16 gap-6 lg:gap-8">
+      <section className="bg-gray-50 p-8 flex flex-col justify-center items-center py- lg:py-16 gap-6 lg:gap-8 border-y border-gray-200">
         <h1 className="text-2xl lg:text-4xl text-center max-w-3xl">
           จัดอีเวนต์สนุก เพื่อนชอบ ลูกค้าชอบ ทุกระดับประทับใจ
           ไม่ต้องปวดหัวกับปัญหายิบย่อยวุ่นวาย 🔥
@@ -70,34 +70,64 @@ const Landing = () => {
       </section>
       <section>
         <div className="p-10 lg:px-16 lg:pt-24 flex flex-col justify-center items-center gap-8">
-          <h1 className="text-3xl lg:text-4xl text-center pb-6">
-            เกิดมาเพื่ออีเวนต์ และคนจัดอีเวนต์เท่านั้น 🌟
-          </h1>
-          <h3 className="text-gray-700 text-2xl">คุณเคยเจอปัญหานี้หรือไม่:</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <h6 className="text-center text-gray-500 max-w-2xl">
-              📅 ใช้ monday ทำ agenda
-              แล้วการแก้บล็อคเวลาสักช่วงทำให้ในหลายครั้งคุณต้องรื้อโครงสร้างของตารางใหม่
-            </h6>
-            <h6 className="text-center text-gray-500 max-w-2xl">
-              🗄️🔥 ใช้ notion ทำรายละเอียดอีเวนต์​
-              แต่นานเข้าโครงสร้างข้อมูลก็บวมจนหาไม่เจอ
-            </h6>
-            <h6 className="text-center text-gray-500 max-w-2xl">
-              📑 ใช้ excel ทำข้อมูลสตาฟ แต่รูปแบบข้อมูล ---
-              จนนำไปใช้ประโยชน์อื่น ๆ ต่อได้ยาก
-            </h6>
-            <h6 className="text-center text-gray-500 max-w-2xl">
-              📱 รัน operation วันงานด้วยกระดาษและ messaging app แต่ก็
-              out-of-sync จนต้องนัดบรีฟออฟไลน์กันบ่อยครั้งจนเสียเวลา
-            </h6>
+          <div className="flex flex-col justify-center items-center gap-2">
+            <h1 className="text-3xl lg:text-4xl text-center">
+              เกิดมาเพื่ออีเวนต์ และคนจัดอีเวนต์เท่านั้น
+            </h1>
+            <h3 className="text-gray-700 text-2xl">
+              คุณเคยเจอปัญหานี้หรือไม่:
+            </h3>
           </div>
-          <h3 className="text-gray-700 text-lg max-w-3xl text-center">
-            เพราะเครื่องมือที่ครอบคลุมที่สุด
-            อาจไม่ใช่เครื่องมือที่มีสะดวกที่สุดเสมอไป -- 👌🏻 okmize
-            ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
-            เพื่อสร้างเครื่องมือเฉพาะเจาะจงให้สะดวกต่อกลุ่มผู้จัดอีเวนต์มากที่สุด
-          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 px-8 lg:px-0">
+            <div className="flex flex-col justify-center items-center gap-3">
+              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+                📅
+              </div>
+              <h6 className="text-center text-gray-500 max-w-2xl">
+                ใช้ monday ทำ agenda
+                แล้วการแก้บล็อคเวลาสักช่วงทำให้ในหลายครั้งคุณต้องรื้อโครงสร้างของตารางใหม่
+              </h6>
+            </div>
+            <div className="flex flex-col justify-center items-center gap-3">
+              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+                🗄️
+              </div>
+              <h6 className="text-center text-gray-500 max-w-2xl">
+                ใช้ notion ทำรายละเอียดอีเวนต์​
+                แต่นานเข้าโครงสร้างข้อมูลก็บวมจนหาไม่เจอ
+              </h6>
+            </div>
+            <div className="flex flex-col justify-center items-center gap-3">
+              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+                📑
+              </div>
+              <h6 className="text-center text-gray-500 max-w-2xl">
+                ใช้ excel ทำข้อมูลสตาฟ แต่รูปแบบข้อมูล --- จนนำไปใช้ประโยชน์อื่น
+                ๆ ต่อได้ยาก
+              </h6>
+            </div>
+            <div className="flex flex-col justify-center items-center gap-3">
+              <div className="bg-purple-100 rounded-full aspect-square h-12 border border-purple-200 flex items-center justify-center">
+                📱
+              </div>
+              <h6 className="text-center text-gray-500 max-w-2xl">
+                รัน operation วันงานด้วยกระดาษและ messaging app แต่ก็
+                out-of-sync จนต้องนัดบรีฟออฟไลน์กันบ่อยครั้งจนเสียเวลา
+              </h6>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center items-center gap-4 lg:gap-2 max-w-2xl">
+            <h3 className="text-gray-700 text-lg max-w-3xl text-center">
+              เพราะเครื่องมือที่
+              <span className="font-semibold">ครอบคลุมที่สุด </span>
+              อาจไม่ใช่เครื่องมือที่
+              <span className="font-semibold">สะดวกที่สุด </span>เสมอไป
+            </h3>
+            <h3 className="text-gray-700 text-lg max-w-3xl text-center">
+              👌🏻 okmize ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
+              เพื่อสร้างเครื่องมือที่เป็นมิตรต่อกลุ่มผู้จัดอีเวนต์มากที่สุด
+            </h3>
+          </div>
         </div>
       </section>
     </div>
