@@ -53,15 +53,12 @@ export default function View() {
   const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
-    const unsubscribe = subscribeSchedule(
-      "ywc19",
-      (data: { agenda: ScheduleSlot[] }) => {
-        setScheduleSlots(data.agenda);
+    const unsubscribe = subscribeSchedule("ywc19", (data: { agenda: ScheduleSlot[] }) => {
+      setScheduleSlots(data.agenda);
 
-        setCurrentSlot(getCurrentSlot(data.agenda));
-        setNextSlot(getNextSlot(data.agenda));
-      }
-    );
+      setCurrentSlot(getCurrentSlot(data.agenda));
+      setNextSlot(getNextSlot(data.agenda));
+    });
 
     return () => {
       unsubscribe();
@@ -105,9 +102,7 @@ export default function View() {
       <main className={`flex min-h-screen flex-col items-center p-12`}>
         <div className="px-4 sm:px-16 py-20 flex flex-col gap-4 justify-center items-center rounded-2xl bg-gradient-to-r from-[#7049FF] to-[#8B55FF]">
           <div className="md:col-span-2 bg-white shadow-md rounded-2xl flex flex-col gap-6 w-full items-center p-10">
-            <h1 className="flex flex-row gap-2 items-baseline text-neutral-500">
-              Current Time
-            </h1>
+            <h1 className="flex flex-row gap-2 items-baseline text-neutral-500">Current Time</h1>
 
             <CurrentTime currentTime={currentTime} />
 
@@ -125,9 +120,7 @@ export default function View() {
               <div className="flex flex-col">
                 <h2 className="font-bold text-black">กิจกรรมถัดไป</h2>
                 <span className="text-neutral-500">
-                  {nextSlot
-                    ? `${nextSlot.title} (${nextSlot.start}-${nextSlot.end})`
-                    : "No Slot"}
+                  {nextSlot ? `${nextSlot.title} (${nextSlot.start}-${nextSlot.end})` : "No Slot"}
                 </span>
               </div>
             </div>
@@ -220,16 +213,10 @@ export default function View() {
           <Tabs.Root className="TabsRoot" defaultValue="day1">
             <Tabs.List className="TabsList" aria-label="Manage schedule">
               <div className="mb-6 flex gap-4">
-                <Tabs.Trigger
-                  className="TabsTrigger pb-4 border-b border-purple-500"
-                  value="day1"
-                >
+                <Tabs.Trigger className="TabsTrigger pb-4 border-b border-purple-500" value="day1">
                   Day 1
                 </Tabs.Trigger>
-                <Tabs.Trigger
-                  className="TabsTrigger border-b pb-4"
-                  value="day2"
-                >
+                <Tabs.Trigger className="TabsTrigger border-b pb-4" value="day2">
                   Day 2
                 </Tabs.Trigger>
               </div>
@@ -249,13 +236,7 @@ export default function View() {
                     key={slot.id}
                   >
                     <h1 className="text-bold">{slot.title}</h1>
-                    <p
-                      className={
-                        currentSlot?.id === slot.id
-                          ? "text-white"
-                          : "text-neutral-500"
-                      }
-                    >
+                    <p className={currentSlot?.id === slot.id ? "text-white" : "text-neutral-500"}>
                       {slot.start} - {slot.end}
                     </p>
                   </div>
