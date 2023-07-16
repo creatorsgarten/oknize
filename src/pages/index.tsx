@@ -1,23 +1,31 @@
-import Navbar from "@/components/navbar/Navbar";
+import { useRouter } from "next/router";
 import { Button } from "../components/ui/button";
+import Navbar from "@/components/navbar/Navbar";
 import Image from "next/image";
 
-const Feature = () => {
+const Feature = ({
+  name,
+  icon,
+  desc,
+}: {
+  name: string;
+  icon: string;
+  desc: string;
+}) => {
   return (
     <div className="flex flex-col justify-center items-center gap-2">
-      <div className="bg-purple-100 text-4xl rounded-full aspect-square p-4 flex items-center justify-center">
-        K
+      <div className="bg-purple-100 text-4xl h-16 w-16 rounded-full aspect-square p-4 flex items-center justify-center border border-purple-200">
+        {icon}
       </div>
-      <h6 className="text-lg">Lorem Ipsum Dolor.</h6>
-      <p className="text-center text-gray-500">
-        Whether you have a team of 2 or 200, our shared team inboxes keep
-        everyone on the same page and in the loop.
-      </p>
+      <h6 className="text-lg">{name}</h6>
+      <p className="text-center text-gray-500">{desc}</p>
     </div>
   );
 };
 
 const Landing = () => {
+  const router = useRouter();
+
   return (
     <div>
       <Navbar />
@@ -29,14 +37,19 @@ const Landing = () => {
               <span className="font-semibold">oknize 👌🏻</span>
             </h1>
             <h4 className="text-lg sm:text-xl text-neutral-500 text-center">
-              แพลตฟอร์มและชุดเครื่องมือ ออกแบบโดยนักจัดอีเวนต์
-              เพื่อนักจัดอีเวนต์
+              แพลตฟอร์มและชุดเครื่องมือ ออกแบบโดยผู้จัดอีเวนต์
+              เพื่อผู้จัดอีเวนต์
             </h4>
           </div>
           <div>
-            <button className="px-8 py-3 shadow-md rounded-lg bg-purple-500 text-white duration-500 transition-all hover:shadow-xl">
+            <Button
+              className="bg-purple-500"
+              onClick={() => {
+                router.push("/home");
+              }}
+            >
               ลองใช้เลย!
-            </button>
+            </Button>
           </div>
         </div>
       </section>
@@ -64,10 +77,26 @@ const Landing = () => {
             </h6>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-12 pt-8 pb-16">
-            <Feature />
-            <Feature />
-            <Feature />
-            <Feature />
+            <Feature
+              icon="⏱️"
+              name="จัดการตารางเวลาวันงาน"
+              desc="ปรับเปลี่ยนตารางเวลาแบบเรียลไทม์ และสามารถ sync กับสตาฟทุกคนได้ในทันที"
+            />
+            <Feature
+              icon="📝"
+              name="สร้าง Template สำหรับสปอนเซอร์"
+              desc="ลดเวลาในการทำเอกสารเพื่อผู้สนับสนุน ผู้น่ารักของคุณ ให้ติดต่อกันได้ง่ายขึ้น"
+            />
+            <Feature
+              icon="🙌"
+              name="สตาฟเริ่มงานได้ทันที"
+              desc="คลิกเดียวเท่านั้น! Staff และอาสาสมัครทุกคนของคุณสามารถเข้าถึงข้อมูลของทั้งอีเวนต์ของคุณทันที"
+            />
+            <Feature
+              icon="📒"
+              name="บริหารข้อมูลทรัพยากร"
+              desc="ศูนย์กลางข้อมูลห้องที่ใช้ อาหาร ที่จอดรถ รายชื่อสตาฟ และบทบาททั้งหมด แบบมัดรวมในที่เดียว"
+            />
           </div>
         </div>
       </section>
@@ -77,10 +106,12 @@ const Landing = () => {
           ไม่ต้องปวดหัวกับปัญหายิบย่อยวุ่นวาย 🔥
         </h1>
         <div className="flex flex-col justify-center items-center">
-          <div className="h-12 rounded-full aspect-square bg-purple-500"></div>
-          <h6 className="text-base pt-4">สมสวัสดิ์ กิตประเสริฐกาล</h6>
+          <div className="h-12 rounded-full aspect-square bg-purple-500 overflow-hidden">
+            <Image src="/nutpinyo.jpg" alt="" width="48" height="48" />
+          </div>
+          <h6 className="text-base pt-4">ณัฐ ภิญโญ</h6>
           <p className="text-gray-500 text-sm">
-            นักออกแบบแฮคอะทอน, Pra Titan Company
+            Senior Advisor / Ex-president, Thinc.
           </p>
         </div>
       </section>
@@ -118,8 +149,7 @@ const Landing = () => {
                 📑
               </div>
               <h6 className="text-center text-gray-500 max-w-2xl">
-                ใช้ excel ทำข้อมูลสตาฟ แต่รูปแบบข้อมูล --- จนนำไปใช้ประโยชน์อื่น
-                ๆ ต่อได้ยาก
+                ใช้ excel ทำข้อมูลสตาฟ แต่รูปแบบข้อมูลก็ยากจะนำไปประยุกต์ใช้ต่อ
               </h6>
             </div>
             <div className="flex flex-col justify-center items-center gap-3">
@@ -142,6 +172,9 @@ const Landing = () => {
             <h3 className="text-gray-700 text-lg max-w-3xl text-center">
               👌🏻 okmize ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
               เพื่อสร้างเครื่องมือที่เป็นมิตรต่อกลุ่มผู้จัดอีเวนต์มากที่สุด
+            </h3>
+            <h3 className="text-purple-600 text-lg max-w-3xl text-center pt-3 font-semibold">
+              <a href="/about">🙋🏻 เกี่ยวกับเรา &gt;</a>
             </h3>
           </div>
         </div>

@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight, ListFilter, Search } from "lucide-react";
 
 const HomePage = () => {
   return (
-    <div className="px-4 py-8 pb-0 md:max-w-screen-lg md:mx-auto">
+    <div className="px-4 md:px-0 py-8 pb-0 max-w-screen-lg md:mx-auto">
       <div className="font-lg text-lg">Event Managment</div>
       <div className=" text-gray-500">Lorem ipsum dolor sit amet consectetur.</div>
 
