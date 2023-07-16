@@ -35,7 +35,7 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
-      <footer className="flex flex-col p-8 justify-center items-center gap-4">
+      <footer className="flex flex-col p-8 justify-center items-center gap-3">
         <div className="text-3xl">👌🏻 oknize</div>
         <div className="text-gray-500">
           © 2077 Untitled UI. All rights reserved.
