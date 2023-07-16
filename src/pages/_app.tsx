@@ -1,6 +1,20 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import Navbar from "@/components/navbar/Navbar";
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
+import { Nunito, Noto_Sans_Thai } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const nunito = Nunito({ subsets: ["latin"] });
+const notosansthai = Noto_Sans_Thai({ subsets: ["thai"] });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const router = useRouter();
+
+  return (
+    <div className={notosansthai.className}>
+      {router.pathname !== "/create" && <Navbar />}
+      <Component {...pageProps} />
+    </div>
+  );
 }

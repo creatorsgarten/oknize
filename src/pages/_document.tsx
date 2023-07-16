@@ -30,7 +30,6 @@ export default function Document() {
         {/* manifest */}
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <Navbar />
       <body>
         <Main />
         <NextScript />
