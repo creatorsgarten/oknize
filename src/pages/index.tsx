@@ -16,6 +16,7 @@ import CurrentTime from "@/components/time/CurrentTime";
 
 import TaskTable from "@/components/table/TaskTable";
 import ProgressBar from "@/components/time/ProgressBar";
+import runOneSignal from "@/lib/onesignal";
 
 export default function Home() {
   const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
@@ -63,6 +64,10 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
+  }, [ScheduleSlots]);
+
+  useEffect(() => {
+    runOneSignal();
   }, []);
 
   return (
