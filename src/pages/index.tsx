@@ -101,7 +101,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section className="bg-gray-50 p-8 flex flex-col justify-center items-centerç gap-6 lg:gap-8 border-y border-gray-200">
+      <section className="bg-gray-50 p-8 flex flex-col justify-center items-center gap-6 lg:gap-8 border-y border-gray-200">
         <h1 className="text-2xl lg:text-4xl text-center max-w-3xl">
           จัดอีเวนต์สนุก เพื่อนชอบ ลูกค้าชอบ ทุกระดับประทับใจ
           ไม่ต้องปวดหัวกับปัญหายิบย่อยวุ่นวาย 🔥
