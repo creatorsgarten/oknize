@@ -171,7 +171,7 @@ const Landing = () => {
               <span className="font-semibold">สะดวกที่สุด </span>เสมอไป
             </h3>
             <h3 className="text-gray-700 text-lg max-w-3xl text-center">
-              👌🏻 okmize ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
+              👌🏻 oknize ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
               เพื่อสร้างเครื่องมือที่เป็นมิตรต่อกลุ่มผู้จัดอีเวนต์มากที่สุด
             </h3>
             <h3 className="text-purple-600 text-lg max-w-3xl text-center pt-3 font-semibold">
@@ -180,7 +180,7 @@ const Landing = () => {
           </div>
         </div>
       </section>
-      <section className="bg-purple-50 grid grid-cols-1 md:grid-cols-3 gap-8 p-8 lg:px-32 md:gap-16 border border-purple-200">
+      {/* <section className="bg-purple-50 grid grid-cols-1 md:grid-cols-3 gap-8 p-8 lg:px-32 md:gap-16 border border-purple-200">
         <div className="flex flex-col bg-white border border-gray-200 rounded-lg p-6">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-semibold">Personal</h1>
@@ -227,7 +227,7 @@ const Landing = () => {
             </ul>
           </div>
         </div>
-      </section>
+      </section> */}
       <Footer />
     </div>
   );

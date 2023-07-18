@@ -1,4 +1,6 @@
-# YWC Group A
+# Oknize
+
+จัดอีเวนต์ให้ nice ด้วย Oknize 👌🏻
 
 ## Instruction
 
