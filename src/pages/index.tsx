@@ -110,7 +110,7 @@ const Landing = () => {
           <div className="h-12 rounded-full aspect-square bg-purple-500 overflow-hidden">
             <Image src="/nutpinyo.jpg" alt="" width="48" height="48" />
           </div>
-          <h6 className="text-base pt-4">ณัฐ ภิญโญ</h6>
+          <h6 className="text-base pt-4">ณัฎฐ์ ภิญโญ</h6>
           <p className="text-gray-500 text-sm">
             Senior Advisor / Ex-president, Thinc.
           </p>
@@ -174,8 +174,11 @@ const Landing = () => {
               👌🏻 oknize ออกแบบมาเพื่อคนจัดอีเวนต์และจะเป็นเช่นนี้ต่อไป
               เพื่อสร้างเครื่องมือที่เป็นมิตรต่อกลุ่มผู้จัดอีเวนต์มากที่สุด
             </h3>
-            <h3 className="text-purple-600 text-lg max-w-3xl text-center pt-3 font-semibold">
-              <Link href="/about">🙋🏻 เกี่ยวกับเรา &gt;</Link>
+            <h3 className="group relative text-purple-600 text-lg max-w-3xl text-center pt-3 font-semibold">
+              <Link href="/about">
+                <span>🙋🏻 เกี่ยวกับเรา </span>
+                <span>&gt;</span>
+              </Link>
             </h3>
           </div>
         </div>
