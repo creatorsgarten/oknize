@@ -94,7 +94,7 @@ export default function View({
                             <p>{event?.description}</p>
                         </div>
 
-                        <Link href={'/event/12345/view'}>
+                        <Link href={`/event/${event?.id}/view`}>
                             <Button className="mt-6 border bg-[#FFFFFF] text-[#344054] hover:bg-slate-50">
                                 View
                             </Button>

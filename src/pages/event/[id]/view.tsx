@@ -14,19 +14,12 @@ import { useEffect, useState } from 'react';
 import { deleteTask, editTask, subscribeSchedule } from '@/lib/db';
 import { ScheduleSlot, getCurrentSlot, getNextSlot } from '@/lib/schedule';
 import CurrentTime from '@/components/time/CurrentTime';
-
-import TaskTable from '@/components/table/TastTable/TaskTable';
 import ProgressBar from '@/components/time/ProgressBar';
 import runOneSignal from '@/lib/onesignal';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Noto_Sans_Thai } from 'next/font/google';
-
-const notosansthai = Noto_Sans_Thai({ subsets: ['thai'] });
+import { InferGetServerSidePropsType } from 'next';
 
 const Navbar = () => {
     return (
@@ -51,7 +44,17 @@ const Navbar = () => {
     );
 };
 
-export default function View() {
+export function getServerSideProps({ params }: { params: { id: string } }) {
+    return {
+        props: {
+            id: params.id,
+        },
+    };
+}
+
+export default function View({
+    id,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
     const [currentSlot, setCurrentSlot] = useState<ScheduleSlot | null>(null);
     const [nextSlot, setNextSlot] = useState<ScheduleSlot | null>(null);
@@ -59,7 +62,7 @@ export default function View() {
 
     useEffect(() => {
         const unsubscribe = subscribeSchedule(
-            'ywc19',
+            id,
             (data: { agenda: ScheduleSlot[] }) => {
                 setScheduleSlots(data.agenda);
 
@@ -71,15 +74,7 @@ export default function View() {
         return () => {
             unsubscribe();
         };
-    }, []);
-
-    const handleOnDeleteTaskData = (data: ScheduleSlot) => {
-        deleteTask('ywc19', ScheduleSlots, data);
-    };
-
-    const handleSaveChanges = (data: ScheduleSlot) => {
-        editTask('ywc19', ScheduleSlots, data);
-    };
+    }, [id]);
 
     useEffect(() => {
         function updateInterval() {
@@ -145,7 +140,7 @@ export default function View() {
                         </div>
                     </div>
 
-                    <div className={notosansthai.className}>
+                    {/* <div className={notosansthai.className}>
                         <Dialog>
                             <DialogTrigger asChild>
                                 <button className="flex items-center gap-2 rounded-lg bg-gradient-to-b from-white to-slate-100 px-12 py-6 text-lg font-bold text-purple-600 shadow-md">
@@ -233,7 +228,7 @@ export default function View() {
                                 </div>
                             </DialogContent>
                         </Dialog>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="mx-auto mt-8 w-full max-w-lg">
