@@ -33,11 +33,11 @@ jobs:
               uses: docker/build-push-action@v3
               with:
                   push: true
-                  tags: ghcr.io/webmastercamp/${{ github.event.repository.name }}:latest
+                  tags: ghcr.io/creatorsgarten/oknize
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
-            - name: deploy
-              uses: WebmasterCamp/deploy-action@main
-              with:
-                  image: ghcr.io/webmastercamp/${{ github.event.repository.name }}@${{ steps.build-and-push.outputs.digest }}
-                  port: 3000
+            # - name: deploy
+            #   uses: WebmasterCamp/deploy-action@main
+            #   with:
+            #     image: ghcr.io/webmastercamp/${{ github.event.repository.name }}@${{ steps.build-and-push.outputs.digest }}
+            #     port: 3000
