@@ -15,7 +15,7 @@ import { deleteTask, editTask, subscribeSchedule } from '@/lib/db';
 import { ScheduleSlot, getCurrentSlot, getNextSlot } from '@/lib/schedule';
 import CurrentTime from '@/components/time/CurrentTime';
 
-import TaskTable from '@/components/table/TaskTable';
+import TaskTable from '@/components/table/TastTable/TaskTable';
 import ProgressBar from '@/components/time/ProgressBar';
 import runOneSignal from '@/lib/onesignal';
 import Link from 'next/link';

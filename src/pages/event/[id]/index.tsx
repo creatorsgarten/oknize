@@ -10,7 +10,7 @@ import { deleteTask, editTask, subscribeSchedule } from '@/lib/db';
 import { ScheduleSlot, getCurrentSlot, getNextSlot } from '@/lib/schedule';
 import CurrentTime from '@/components/time/CurrentTime';
 
-import TaskTable from '@/components/table/TaskTable';
+import TaskTable from '@/components/table/TastTable/TaskTable';
 import ProgressBar from '@/components/time/ProgressBar';
 import runOneSignal from '@/lib/onesignal';
 import { Button } from '@/components/ui/button';
@@ -60,7 +60,7 @@ export default function View({
                         <div>หนัาหลัก</div>
                     </Link>
                     <div>/</div>
-                    <Link href={`/event/${'d'}`}>
+                    <Link href={`/event/${id}`}>
                         <div className="text-[#6941C6]">จัดการอีเวนต์</div>
                     </Link>
                 </div>
