@@ -244,17 +244,17 @@ export default function View() {
                         >
                             <div className="mb-6 flex gap-4">
                                 <Tabs.Trigger
-                                    className="TabsTrigger border-b border-purple-500 pb-4"
+                                    className="TabsTrigger"
                                     value="day1"
                                 >
                                     Day 1
                                 </Tabs.Trigger>
-                                <Tabs.Trigger
-                                    className="TabsTrigger border-b pb-4"
+                                {/* <Tabs.Trigger
+                                    className="TabsTrigger"
                                     value="day2"
                                 >
                                     Day 2
-                                </Tabs.Trigger>
+                                </Tabs.Trigger> */}
                             </div>
                         </Tabs.List>
 

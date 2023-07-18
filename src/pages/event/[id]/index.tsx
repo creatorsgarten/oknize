@@ -21,56 +21,35 @@ import Link from 'next/link';
 import Navbar from '@/components/navbar/Navbar';
 import Footer from '@/components/footer/Footer';
 import { useEvent } from '@/hooks/useEvent';
+import { InferGetServerSidePropsType } from 'next';
+import useScheduleSlot from '@/hooks/useScheduleSlot';
 
-export default function View() {
-    const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
-    const [currentSlot, setCurrentSlot] = useState<ScheduleSlot | null>(null);
-    const [nextSlot, setNextSlot] = useState<ScheduleSlot | null>(null);
-    const [currentTime, setCurrentTime] = useState('');
+export function getServerSideProps({ params }: { params: { id: string } }) {
+    return {
+        props: {
+            id: params.id,
+        },
+    };
+}
+
+export default function View({
+    id,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    const { data: event } = useEvent(id);
+    const { scheduleSlots, currentSlot, nextSlot, currentTime } =
+        useScheduleSlot(id);
 
     useEffect(() => {
-        const unsubscribe = subscribeSchedule(
-            'ywc19',
-            (data: { agenda: ScheduleSlot[] }) => {
-                setScheduleSlots(data.agenda);
-
-                setCurrentSlot(getCurrentSlot(data.agenda));
-                setNextSlot(getNextSlot(data.agenda));
-            }
-        );
-
         runOneSignal();
-
-        return () => {
-            unsubscribe();
-        };
     }, []);
 
     const handleOnDeleteTaskData = (data: ScheduleSlot) => {
-        deleteTask('ywc19', ScheduleSlots, data);
+        deleteTask(id, scheduleSlots, data);
     };
 
     const handleSaveChanges = (data: ScheduleSlot) => {
-        editTask('ywc19', ScheduleSlots, data);
+        editTask(id, scheduleSlots, data);
     };
-
-    useEffect(() => {
-        function updateInterval() {
-            setCurrentSlot(getCurrentSlot(ScheduleSlots));
-            setNextSlot(getNextSlot(ScheduleSlots));
-        }
-
-        const interval = setInterval(() => {
-            var today = new Date();
-            var now = today.toLocaleTimeString('th-TH');
-            setCurrentTime(now);
-
-            updateInterval();
-        }, 1000);
-        return () => {
-            clearInterval(interval);
-        };
-    }, [ScheduleSlots]);
 
     return (
         <div>
@@ -90,12 +69,12 @@ export default function View() {
                     <div className="text-2xl font-bold">จัดการอีเวนต์</div>
 
                     <div className="flex flex-row gap-4">
-                        <Link href={'/event/12345/view'}>
+                        {/* <Link href={'/event/12345/view'}>
                             <Button className="border bg-[#FFFFFF] text-[#344054]">
                                 Share
                             </Button>
-                        </Link>
-                        <Link href={'/event/12345/view'}>
+                        </Link> */}
+                        <Link href={`/event/${event?.id}/view`}>
                             <Button className="flex flex-row items-center gap-2 bg-[#7F56D9] text-[#FFFFFF]">
                                 <Globe size={16} />
                                 Public
@@ -107,13 +86,12 @@ export default function View() {
                 <div className="mt-6 grid w-full grid-cols-1 items-center justify-between gap-8 rounded-lg bg-[#6941C6] p-12 sm:grid-cols-2">
                     <div className="order-last sm:order-first">
                         <div>
-                            <div className="text-xl font-bold text-white">
-                                Young Webmaster Camp 19th (YWC19)
+                            <div className="text-2xl font-bold text-white">
+                                {event?.name}
                             </div>
                         </div>
                         <div className="mt-4 text-white">
-                            <p>14 Jun 2023 - 17 Jun 2023</p>
-                            <p>Place: SCB Training Center</p>
+                            <p>{event?.description}</p>
                         </div>
 
                         <Link href={'/event/12345/view'}>
@@ -187,7 +165,7 @@ export default function View() {
 
                 <div className="mt-8 w-full">
                     <TaskTable
-                        tableData={ScheduleSlots}
+                        tableData={scheduleSlots}
                         onSave={handleSaveChanges}
                         onDelete={handleOnDeleteTaskData}
                     />
