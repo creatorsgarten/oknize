@@ -25,7 +25,36 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
             <div className={notosansthai.className}>
                 <Head>
-                    <title>OKNIZE</title>
+                    <title>Oknize</title>
+                    <meta
+                        name="description"
+                        content="สร้างอีเวนต์ให้ nice ด้วย Oknize"
+                    />
+
+                    {/* og tags */}
+                    <meta property="og:title" content="Oknize" />
+                    <meta property="og:type" content="website" />
+                    <meta
+                        property="og:url"
+                        content="https://oknize.grtn.org/"
+                    />
+                    <meta property="og:image" content="/Thumbnail.png" />
+
+                    {/* twitter tags */}
+                    <meta
+                        property="twitter:card"
+                        content="summary_large_image"
+                    />
+                    <meta
+                        property="twitter:url"
+                        content="https://oknize.grtn.org/"
+                    />
+                    <meta property="twitter:title" content="Oknize" />
+                    <meta
+                        property="twitter:description"
+                        content="สร้างอีเวนต์ให้ nice ด้วย Oknize"
+                    />
+                    <meta property="twitter:image" content="/Thumbnail.png" />
                 </Head>
 
                 <div className="hidden md:block">

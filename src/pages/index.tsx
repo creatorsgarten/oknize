@@ -54,9 +54,9 @@ const Landing = () => {
                 </div>
             </section>
 
-            <section className="py-4">
+            <section className="mx-auto max-w-2xl py-4">
                 <Image
-                    src="/assets/product.png"
+                    src="/assets/mock.png"
                     width={1920}
                     height={1080}
                     alt="product ของเรา"

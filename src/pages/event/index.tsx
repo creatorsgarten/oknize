@@ -1,10 +1,8 @@
 import CardCarousel from '@/components/CardCarousel';
 import HomeTemplateCard from '@/components/card/HomeTemplateCard';
-import { DatePickerWithRange } from '@/components/input/DatePickerWithRange';
 import { DataTable, DesktopDataTable } from '@/components/table/DataTable';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, ArrowRight, ListFilter, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 const HomePage = () => {
     return (
@@ -49,7 +47,7 @@ const HomePage = () => {
                     <DesktopDataTable />
                 </div>
 
-                <div className="mt-4 flex flex-row items-center justify-between">
+                {/* <div className="mt-4 flex flex-row items-center justify-between">
                     <Button variant={'ghost'}>
                         <ArrowLeft color="#667085" />
                     </Button>
@@ -57,7 +55,7 @@ const HomePage = () => {
                     <Button variant={'ghost'}>
                         <ArrowRight color="#667085" />
                     </Button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
