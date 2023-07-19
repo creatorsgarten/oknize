@@ -36,8 +36,15 @@ jobs:
           tags: ghcr.io/creatorsgarten/oknize
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      # - name: deploy
-      #   uses: WebmasterCamp/deploy-action@main
-      #   with:
-      #     image: ghcr.io/webmastercamp/${{ github.event.repository.name }}@${{ steps.build-and-push.outputs.digest }}
-      #     port: 3000
+      - name: publish
+        uses: deploys-app/deploys-action@v1
+        with:
+          project: ${{ secrets.DEPLOYS_NAME }}
+          location: gke.cluster-rcf2
+          name: oknize
+          image: ghcr.io/creatorsgarten/oknize
+          minReplicas: 1
+          maxReplicas: 1
+        env:
+          DEPLOYS_AUTH_USER: ${{ secrets.DEPLOYS_AUTH_USER }}
+          DEPLOYS_AUTH_PASS: ${{ secrets.DEPLOYS_AUTH_PASS }}
