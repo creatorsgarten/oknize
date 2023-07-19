@@ -1,0 +1,5 @@
+{
+    "thaiLover": false,
+    "veryHoly": false,
+    "ignore": ["^\\.monk", "^.gitingore", "^readme.md'", "^.prettierignore"]
+}

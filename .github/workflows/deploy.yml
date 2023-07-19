@@ -1,18 +1,18 @@
 name: Deployment
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    workflow_dispatch:
 
 permissions:
-  id-token: write
-  contents: read
-  packages: write
+    id-token: write
+    contents: read
+    packages: write
 
 concurrency:
-  group: deploy
-  cancel-in-progress: false
+    group: deploy
+    cancel-in-progress: false
 
 jobs:
   deploy:
@@ -27,7 +27,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
       - name: build
         id: build-and-push
         uses: docker/build-push-action@v3
