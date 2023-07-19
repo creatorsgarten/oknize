@@ -30,7 +30,7 @@ jobs:
           password: ${{ github.token }}
       - name: build
         id: build-and-push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: ghcr.io/creatorsgarten/oknize
