@@ -60,7 +60,7 @@ export default function EditTaskDialog({
 
                 <div className="grid gap-4 py-4">
                     <div className="flex w-full flex-col gap-4">
-                        <div className="w-full items-center ">
+                        <div className="w-full items-center">
                             <Label htmlFor="scheduleStart">Start</Label>
                             <Input
                                 type="text"

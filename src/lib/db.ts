@@ -9,6 +9,7 @@ import {
     collection,
     getDocs,
     onSnapshot,
+    deleteDoc,
 } from 'firebase/firestore';
 import firebaseApp from './firebase';
 import { ScheduleSlot, sortSchedule } from './schedule';
@@ -86,7 +87,7 @@ export async function deleteTask(
     await setDoc(scheduleRef, { agenda: filteredchedule }, { merge: true });
 }
 
-// udpate
+// update
 export async function setSchedule(uid: string, schedule: DocumentData) {
     const scheduleRef = getScheduleRef(uid);
     await setDoc(scheduleRef, schedule, { merge: true });
@@ -95,9 +96,9 @@ export async function setSchedule(uid: string, schedule: DocumentData) {
 export async function getEventList() {
     const eventListRef = collection(db, 'schedule');
     const eventListSnapshot = await getDocs(eventListRef);
-    const eventList = eventListSnapshot.docs.map((doc) =>
-        doc.data()
-    ) as EventItem[];
+    const eventList = eventListSnapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+    }) as EventItem[];
     return eventList;
 }
 
@@ -105,5 +106,16 @@ export async function getEventById(eventId: string) {
     const eventRef = doc(db, 'schedule', eventId);
     const eventSnapshot = await getDoc(eventRef);
     const event = eventSnapshot.data() as EventItem;
-    return event;
+    return { ...event, id: eventSnapshot.id };
+}
+
+export async function addEvent(event: any) {
+    const eventListRef = collection(db, 'schedule');
+    return (await addDoc(eventListRef, event)).id;
+}
+
+export async function deleteEvent(eventId: string) {
+    const eventRef = doc(db, 'schedule', eventId);
+    // delete event
+    await deleteDoc(eventRef);
 }

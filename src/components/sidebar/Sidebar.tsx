@@ -50,17 +50,19 @@ const Sidebar = () => {
                 <AccordionItem value="item-2">
                     <AccordionTrigger>Events</AccordionTrigger>
                     <AccordionContent>
-                        {eventList.data?.map((event, index) => {
-                            return (
-                                <Link
-                                    className="w-full text-gray-600 transition-colors hover:text-gray-800 hover:underline"
-                                    href={`/event/${event.id}`}
-                                    key={event.id}
-                                >
-                                    {event.name}
-                                </Link>
-                            );
-                        })}
+                        <div className="flex flex-col gap-1">
+                            {eventList.data?.map((event, index) => {
+                                return (
+                                    <Link
+                                        className="w-full text-gray-600 transition-colors hover:text-gray-800 hover:underline"
+                                        href={`/event/${event.id}`}
+                                        key={event.id}
+                                    >
+                                        {event.name}
+                                    </Link>
+                                );
+                            })}
+                        </div>
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>

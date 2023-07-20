@@ -1,12 +1,13 @@
 import { getEventById, getEventList } from '@/lib/db';
+import { ScheduleSlot } from '@/lib/schedule';
 import { useQuery } from '@tanstack/react-query';
 
 export type EventItem = {
     id: string;
     name: string;
     description: string;
-    date: string;
     status: 'public' | 'processing';
+    agenda: ScheduleSlot[];
 };
 
 export function useEvent(eventId: string) {

@@ -59,9 +59,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
                 <div className="hidden md:block">
                     <div className="grid grid-cols-12">
-                        {router.pathname !== '/' &&
-                        router.pathname !== '/about' &&
-                        router.pathname !== '/event/create' ? (
+                        {/* if not this route, add sidebar */}
+                        {!['/', '/about', '/event/create'].includes(
+                            router.pathname
+                        ) ? (
                             <div className="col-span-2">
                                 <Sidebar />
                             </div>
@@ -70,8 +71,9 @@ export default function App({ Component, pageProps }: AppProps) {
                         )}
                         <div
                             className={
-                                router.pathname !== '/' &&
-                                router.pathname !== '/about'
+                                !['/', '/about', '/event/create'].includes(
+                                    router.pathname
+                                )
                                     ? `col-span-10`
                                     : 'col-span-12'
                             }
@@ -82,6 +84,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 </div>
 
                 <div className="block md:hidden">
+                    {/* not this route */}
                     {!['/create', '/', '/about'.includes(router.pathname)] && (
                         <Navbar />
                     )}

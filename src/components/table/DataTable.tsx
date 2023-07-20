@@ -1,4 +1,12 @@
-'use client';
+import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+    DialogFooter,
+    DialogClose,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 
 import { useEffect, useState } from 'react';
 import { Dot, Trash2 } from 'lucide-react';
@@ -12,9 +20,10 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { getEventList } from '@/lib/db';
+import { deleteEvent, getEventList } from '@/lib/db';
 import { useQuery } from '@tanstack/react-query';
 import { useEventList } from '../../hooks/useEvent';
+import { Button } from '../ui/button';
 
 export function DataTable() {
     const { data: eventList } = useEventList();
@@ -84,14 +93,13 @@ export function DesktopDataTable() {
     const { data: eventList } = useEventList();
 
     return (
-        <div className="w-full">
+        <div className="w-full py-10">
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
                         <TableRow>
                             <TableHead></TableHead>
                             <TableHead>Event Name</TableHead>
-                            <TableHead>Public Date</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead></TableHead>
                         </TableRow>
@@ -102,24 +110,22 @@ export function DesktopDataTable() {
                             return (
                                 <TableRow
                                     key={index}
-                                    onClick={() =>
-                                        (window.location.href = `/event/${event.id}`)
-                                    }
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+
+                                        window.location.href = `/event/${event.id}`;
+                                    }}
+                                    className="cursor-pointer"
                                 >
                                     <TableCell>
                                         <Checkbox />
                                     </TableCell>
                                     <TableCell>
-                                        <div className=" text-gray-900">
+                                        <div className="text-gray-900">
                                             {event.name}
                                         </div>
                                         <div className="text-gray-500">
                                             {event.description}
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>
-                                        <div className=" text-gray-900">
-                                            {event.date}
                                         </div>
                                     </TableCell>
                                     <TableCell>
@@ -143,9 +149,45 @@ export function DesktopDataTable() {
                                     </TableCell>
 
                                     <TableCell className="flex h-full items-center justify-center">
-                                        <div>
-                                            <Trash2 />
-                                        </div>
+                                        <Dialog>
+                                            <DialogTrigger asChild>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                    }}
+                                                >
+                                                    <Trash2 />
+                                                </button>
+                                            </DialogTrigger>
+
+                                            <DialogContent className="mx-auto max-w-sm py-10">
+                                                <DialogHeader>
+                                                    <DialogTitle className="text-center">
+                                                        <p>
+                                                            ยืนยันการลบอีเวนต์
+                                                        </p>
+
+                                                        <h1 className="text-xl font-bold">
+                                                            {event.name}
+                                                        </h1>
+                                                    </DialogTitle>
+                                                </DialogHeader>
+
+                                                <DialogClose>
+                                                    <Button
+                                                        onClick={(e) => {
+                                                            deleteEvent(
+                                                                event.id
+                                                            );
+                                                        }}
+                                                        type="submit"
+                                                        className="mx-auto"
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                </DialogClose>
+                                            </DialogContent>
+                                        </Dialog>
                                     </TableCell>
                                 </TableRow>
                             );
