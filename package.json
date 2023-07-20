@@ -27,7 +27,7 @@
         "add": "^2.0.6",
         "autoprefixer": "10.4.14",
         "class-variance-authority": "^0.6.1",
-        "clsx": "^1.2.1",
+        "clsx": "^2.0.0",
         "date-fns": "^2.30.0",
         "eslint": "8.45.0",
         "eslint-config-next": "13.4.10",
