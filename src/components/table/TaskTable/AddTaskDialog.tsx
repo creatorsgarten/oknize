@@ -48,7 +48,7 @@ export default function AddTaskDialog({
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="flex flex-row items-center gap-2 bg-[#7F56D9] text-[#FFFFFF]">
+                <Button className="flex flex-row items-center gap-2 bg-primary text-[#FFFFFF]">
                     <Plus size={16} />
                     Add Task
                 </Button>

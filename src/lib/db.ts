@@ -45,7 +45,10 @@ export async function addTask(
     task: ScheduleSlot
 ) {
     // sort task first then update
-    const scheduleWithNewTask = sortSchedule([...schedule, task]);
+    const scheduleWithNewTask = sortSchedule([
+        ...schedule,
+        { ...task, id: new Date().getUTCDate().toString() },
+    ]);
 
     const scheduleRef = getScheduleRef(uid);
     await setDoc(scheduleRef, { agenda: scheduleWithNewTask }, { merge: true });

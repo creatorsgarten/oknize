@@ -87,3 +87,24 @@ export function addTaskToSchedule(
 
     return sortSchedule(newSchedule);
 }
+
+export function getTimeLeft(currentTime: string, currentSlot: ScheduleSlot) {
+    // hh mm ss
+
+    const [currentHour, currentMin, currentSec] = currentTime.split(':');
+    const [nextHour, nextMin] = currentSlot.end.split(':');
+
+    const currentTotalSec =
+        parseInt(currentHour) * 3600 +
+        parseInt(currentMin) * 60 +
+        parseInt(currentSec);
+    const nextTotalSec = parseInt(nextHour) * 3600 + parseInt(nextMin) * 60 + 0;
+
+    const totalSec = nextTotalSec - currentTotalSec;
+
+    const hour = Math.floor(totalSec / 3600);
+    const min = Math.floor((totalSec % 3600) / 60);
+    const sec = Math.floor((totalSec % 3600) % 60);
+
+    return `${hour > 0 ? `${hour} ชั่วโมง` : ''} ${min} นาที ${sec} วินาที`;
+}
