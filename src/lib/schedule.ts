@@ -108,3 +108,52 @@ export function getTimeLeft(currentTime: string, currentSlot: ScheduleSlot) {
 
     return `${hour > 0 ? `${hour} ชั่วโมง` : ''} ${min} นาที ${sec} วินาที`;
 }
+
+function adjustMinuteToTime(time: string, min: number) {
+    const [hour, minute] = time.split(':');
+
+    const totalMin = parseInt(hour) * 60 + parseInt(minute) + min;
+
+    const newHour = Math.floor(totalMin / 60);
+    const newMin = totalMin % 60;
+
+    // Ensure new minute has two digits
+    const formattedNewMin = newMin.toString().padStart(2, '0');
+
+    return `${newHour}:${formattedNewMin}`;
+}
+
+export function adjustTime(
+    min: number,
+    currentSlot: ScheduleSlot,
+    schedule: ScheduleSlot[]
+) {
+    // add time to slot, append time to every slot afterwards
+
+    // find index of currentSlot
+    const index = schedule.findIndex((slot) => slot.id === currentSlot.id);
+
+    // append mins to end of currentSlot
+    const newCurrentSlot = {
+        ...currentSlot,
+        end: adjustMinuteToTime(currentSlot.end, min),
+    };
+
+    // append mins to every next slot
+    const newSchedule = schedule.map((slot, i) => {
+        if (i > index) {
+            return {
+                ...slot,
+                start: adjustMinuteToTime(slot.start, min),
+                end: adjustMinuteToTime(slot.end, min),
+            };
+        } else {
+            return slot;
+        }
+    });
+
+    // replace currentSlot with newCurrentSlot
+    newSchedule[index] = newCurrentSlot;
+
+    return newSchedule;
+}

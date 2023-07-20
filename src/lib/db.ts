@@ -12,10 +12,14 @@ import {
     deleteDoc,
 } from 'firebase/firestore';
 import firebaseApp from './firebase';
-import { ScheduleSlot, sortSchedule } from './schedule';
+import { ScheduleSlot, adjustTime, sortSchedule } from './schedule';
 import { EventItem } from '@/hooks/useEvent';
 
 const db = getFirestore(firebaseApp);
+
+/*
+Schedule
+*/
 
 export function getScheduleRef(uid: string) {
     return doc(db, 'schedule', uid);
@@ -95,6 +99,22 @@ export async function setSchedule(uid: string, schedule: DocumentData) {
     const scheduleRef = getScheduleRef(uid);
     await setDoc(scheduleRef, schedule, { merge: true });
 }
+
+export async function adjustTimeToTask(
+    uid: string,
+    min: number,
+    currentSlot: ScheduleSlot,
+    schedule: ScheduleSlot[]
+) {
+    const newSchedule = adjustTime(min, currentSlot, schedule);
+
+    const scheduleRef = getScheduleRef(uid);
+    await setDoc(scheduleRef, { agenda: newSchedule }, { merge: true });
+}
+
+/*
+Event
+*/
 
 export async function getEventList() {
     const eventListRef = collection(db, 'schedule');

@@ -11,9 +11,15 @@ import {
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { useEffect, useState } from 'react';
-import { deleteTask, editTask, subscribeSchedule } from '@/lib/db';
+import {
+    adjustTimeToTask,
+    deleteTask,
+    editTask,
+    subscribeSchedule,
+} from '@/lib/db';
 import {
     ScheduleSlot,
+    adjustTime,
     getCurrentSlot,
     getNextSlot,
     getTimeLeft,
@@ -150,31 +156,53 @@ export default function View({
                         </div>
                     </div>
 
-                    <div className="mx-auto mt-4 grid max-w-sm grid-cols-3 gap-10">
-                        <button className="group flex flex-col items-center gap-4">
-                            <div className="rounded-full border border-white p-6 text-white transition-all duration-500 group-hover:bg-white group-hover:text-primary">
-                                <PlusIcon size={32} />
-                            </div>
+                    {currentSlot && (
+                        <div className="mx-auto mt-4 grid max-w-sm grid-cols-3 gap-10">
+                            <button
+                                onClick={() => {
+                                    adjustTimeToTask(
+                                        id,
+                                        5,
+                                        currentSlot,
+                                        ScheduleSlots
+                                    );
+                                }}
+                                className="group flex flex-col items-center gap-4"
+                            >
+                                <div className="rounded-full border border-white p-6 text-white transition-all duration-500 group-hover:bg-white group-hover:text-primary">
+                                    <PlusIcon size={32} />
+                                </div>
 
-                            <span className="text-white">เพิ่มเวลา</span>
-                        </button>
+                                <span className="text-white">เพิ่มเวลา</span>
+                            </button>
 
-                        <button className="group flex flex-col items-center gap-4">
-                            <div className="rounded-full border border-white p-6 text-white transition-all duration-500 group-hover:bg-white group-hover:text-primary">
-                                <MinusIcon size={32} />
-                            </div>
+                            <button
+                                onClick={() => {
+                                    adjustTimeToTask(
+                                        id,
+                                        -5,
+                                        currentSlot,
+                                        ScheduleSlots
+                                    );
+                                }}
+                                className="group flex flex-col items-center gap-4"
+                            >
+                                <div className="rounded-full border border-white p-6 text-white transition-all duration-500 group-hover:bg-white group-hover:text-primary">
+                                    <MinusIcon size={32} />
+                                </div>
 
-                            <span className="text-white">ลดเวลา</span>
-                        </button>
+                                <span className="text-white">ลดเวลา</span>
+                            </button>
 
-                        <button className="group flex flex-col items-center gap-4">
-                            <div className="rounded-full border border-white p-6 text-white transition-all duration-500 group-hover:bg-white group-hover:text-primary">
-                                <RepeatIcon size={32} />
-                            </div>
+                            <button className="group flex flex-col items-center gap-4">
+                                <div className="rounded-full border border-white p-6 text-white transition-all duration-500 group-hover:bg-white group-hover:text-primary">
+                                    <RepeatIcon size={32} />
+                                </div>
 
-                            <span className="text-white">สับเปลี่ยน</span>
-                        </button>
-                    </div>
+                                <span className="text-white">สับเปลี่ยน</span>
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 <div className="mx-auto mt-8 w-full max-w-lg">
