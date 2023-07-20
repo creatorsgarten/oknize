@@ -6,11 +6,11 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { useEffect, useState } from 'react';
-import { deleteTask, editTask, subscribeSchedule } from '@/lib/db';
+import { addTask, deleteTask, editTask, subscribeSchedule } from '@/lib/db';
 import { ScheduleSlot, getCurrentSlot, getNextSlot } from '@/lib/schedule';
 import CurrentTime from '@/components/time/CurrentTime';
 
-import TaskTable from '@/components/table/TastTable/TaskTable';
+import TaskTable from '@/components/table/TaskTable/TaskTableItem';
 import ProgressBar from '@/components/time/ProgressBar';
 import runOneSignal from '@/lib/onesignal';
 import { Button } from '@/components/ui/button';
@@ -49,6 +49,10 @@ export default function View({
 
     const handleSaveChanges = (data: ScheduleSlot) => {
         editTask(id, scheduleSlots, data);
+    };
+
+    const handleAddTask = (data: ScheduleSlot) => {
+        addTask(id, scheduleSlots, data);
     };
 
     return (
@@ -168,6 +172,7 @@ export default function View({
                         tableData={scheduleSlots}
                         onSave={handleSaveChanges}
                         onDelete={handleOnDeleteTaskData}
+                        onAdd={handleAddTask}
                     />
                 </div>
             </div>

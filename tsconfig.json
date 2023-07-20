@@ -22,7 +22,7 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
-        "src/components/table/TastTable"
+        "src/components/table/TaskTable"
     ],
     "exclude": ["node_modules"]
 }

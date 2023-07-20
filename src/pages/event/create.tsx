@@ -1,4 +1,4 @@
-import TaskTable from '@/components/table/TastTable/TaskTable';
+import TaskTable from '@/components/table/TaskTable/TaskTableItem';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
