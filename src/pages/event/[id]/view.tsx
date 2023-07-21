@@ -29,6 +29,7 @@ import ProgressBar from '@/components/time/ProgressBar';
 import runOneSignal from '@/lib/onesignal';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEvent } from '@/hooks/useEvent';
 import { cn } from '@/lib/utils';
 import { InferGetServerSidePropsType } from 'next';
 import { MinusIcon, PlusIcon, RepeatIcon } from 'lucide-react';
@@ -71,6 +72,7 @@ export default function View({
     const [currentSlot, setCurrentSlot] = useState<ScheduleSlot | null>(null);
     const [nextSlot, setNextSlot] = useState<ScheduleSlot | null>(null);
     const [currentTime, setCurrentTime] = useState('');
+    const { data: event } = useEvent(id);
 
     useEffect(() => {
         const unsubscribe = subscribeSchedule(
@@ -115,8 +117,23 @@ export default function View({
             <Navbar />
 
             <main
-                className={`flex min-h-screen flex-col items-center px-4 py-12 sm:px-12`}
+                className={`flex min-h-screen flex-col items-center px-4  pb-12 sm:px-12`}
             >
+                
+                <div className={`mx-auto mt-8 mb-8 w-full max-w-lg text-left`}>
+                    <div className="grid grid-cols-12 gap-4 items-center">
+                        <div className="col-span-4 sm:col-span-2">
+                            <div className='event-qr'>
+                            <img src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=https://oknize.grtn.org/e/${id}/&chld=L|2`} className='w-full' />
+                            </div>
+                        </div>
+                        <div className="col-span-8 sm:col-span-10">
+                            <h1 className={`line-clamp-1 truncate text-lg sm:text-xl font-bold event-title`}>{event?.name}</h1>
+                            <p className='line-clamp-2 text-gray-500'>{event?.description}</p>
+                        </div>
+                    </div>
+
+                </div>
                 <div className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-gradient-to-r from-[#7049FF] to-[#8B55FF] px-4 py-8 sm:px-8">
                     <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-6 rounded-2xl bg-white p-10 shadow-md md:col-span-2">
                         <div className="flex flex-col items-center gap-2">
