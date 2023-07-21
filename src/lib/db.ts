@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
     DocumentData,
     getFirestore,
@@ -51,7 +53,7 @@ export async function addTask(
     // sort task first then update
     const scheduleWithNewTask = sortSchedule([
         ...schedule,
-        { ...task, id: new Date().getUTCDate().toString() },
+        { ...task, id: uuidv4() },
     ]);
 
     const scheduleRef = getScheduleRef(uid);
