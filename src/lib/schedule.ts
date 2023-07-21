@@ -157,3 +157,10 @@ export function adjustTime(
 
     return newSchedule;
 }
+
+export function borrowTime(
+    min: number,
+    currentSlot: ScheduleSlot,
+    borrowedSlot: ScheduleSlot,
+    schedule: ScheduleSlot[]
+) {}
