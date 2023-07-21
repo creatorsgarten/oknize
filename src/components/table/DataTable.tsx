@@ -24,6 +24,7 @@ import { deleteEvent, getEventList } from '@/lib/db';
 import { useQuery } from '@tanstack/react-query';
 import { useEventList } from '../../hooks/useEvent';
 import { Button } from '../ui/button';
+import { useRouter } from 'next/router';
 
 export function DataTable() {
     const { data: eventList } = useEventList();
@@ -91,7 +92,8 @@ export function DataTable() {
 
 export function DesktopDataTable() {
     const { data: eventList } = useEventList();
-
+    const router = useRouter()
+    
     return (
         <div className="w-full py-10">
             <div className="rounded-md border">
@@ -113,7 +115,7 @@ export function DesktopDataTable() {
                                     onClick={(e) => {
                                         e.stopPropagation();
 
-                                        window.location.href = `/event/${event.id}`;
+                                        router.push(`/event/${event.id}`);
                                     }}
                                     className="cursor-pointer"
                                 >

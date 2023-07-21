@@ -1,13 +1,22 @@
 import {
+    Dialog,
+    DialogContent,
+    DialogTrigger,
+    DialogFooter,
+    DialogClose,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
+import {
     Card,
     CardContent,
     CardDescription,
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { useEffect, useState } from 'react';
-import { addTask, deleteTask, editTask, subscribeSchedule } from '@/lib/db';
-import { ScheduleSlot, getCurrentSlot, getNextSlot } from '@/lib/schedule';
+import { useEffect } from 'react';
+import { addTask, deleteTask, editTask } from '@/lib/db';
+import { ScheduleSlot } from '@/lib/schedule';
 import CurrentTime from '@/components/time/CurrentTime';
 
 import TaskTable from '@/components/table/TaskTable/TaskTableItem';
@@ -23,6 +32,9 @@ import Footer from '@/components/footer/Footer';
 import { useEvent } from '@/hooks/useEvent';
 import { InferGetServerSidePropsType } from 'next';
 import useScheduleSlot from '@/hooks/useScheduleSlot';
+import { useRouter } from 'next/router';
+
+import QrCode from 'react-qr-code';
 
 export function getServerSideProps({ params }: { params: { id: string } }) {
     return {
@@ -38,6 +50,7 @@ export default function View({
     const { data: event } = useEvent(id);
     const { scheduleSlots, currentSlot, nextSlot, currentTime } =
         useScheduleSlot(id);
+    const router = useRouter();
 
     useEffect(() => {
         runOneSignal();
@@ -78,12 +91,37 @@ export default function View({
                                 Share
                             </Button>
                         </Link> */}
-                        <Link href={`/event/${event?.id}/view`}>
-                            <Button className="flex flex-row items-center gap-2 bg-primary text-[#FFFFFF]">
-                                <Globe size={16} />
-                                Public
-                            </Button>
-                        </Link>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button className="flex flex-row items-center gap-2 bg-primary text-[#FFFFFF]">
+                                    <Globe size={16} />
+                                    Public
+                                </Button>
+                            </DialogTrigger>
+
+                            <DialogContent className="mx-auto max-w-sm py-10">
+                                <DialogHeader className="p-4">
+                                    <h1 className="mb-4 text-center text-lg font-bold">
+                                        ดูตารางเวลาของงาน
+                                        <br />
+                                        <span className="text-2xl">
+                                            {event?.name}
+                                        </span>
+                                    </h1>
+
+                                    <QrCode
+                                        size={128}
+                                        style={{
+                                            height: 'auto',
+                                            maxWidth: '100%',
+                                            width: '100%',
+                                        }}
+                                        value={`${router.basePath}/event/${id}/view`}
+                                        viewBox={`0 0 256 256`}
+                                    />
+                                </DialogHeader>
+                            </DialogContent>
+                        </Dialog>
                     </div>
                 </div>
 
