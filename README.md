@@ -13,3 +13,16 @@ pnpm dev  # run the script
 
 pnpm build  # build
 ```
+
+## Local development with Firebase Emulator Suite
+
+```bash
+# initialize project config
+cp .firebaserc.example .firebaserc
+
+# initialize .env file
+cp .env.example .env
+
+# launch firebase emulator
+pnpm firebase emulators:start
+```

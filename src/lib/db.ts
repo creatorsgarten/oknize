@@ -13,11 +13,9 @@ import {
     onSnapshot,
     deleteDoc,
 } from 'firebase/firestore';
-import firebaseApp from './firebase';
 import { ScheduleSlot, adjustTime, sortSchedule } from './schedule';
 import { EventItem } from '@/hooks/useEvent';
-
-const db = getFirestore(firebaseApp);
+import { db } from './firebase';
 
 /*
 Schedule
