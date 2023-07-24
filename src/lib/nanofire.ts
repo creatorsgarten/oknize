@@ -21,8 +21,8 @@ export function createDocumentStore<T = any>(
 
         return onSnapshot(
             doc,
-            (doc) => {
-                store.set({ status: 'success', value: doc.data() as T });
+            (snapshot) => {
+                store.set({ status: 'success', value: snapshot.data() as T });
             },
             (error) => {
                 store.set({ ...store.get(), status: 'error', error });
