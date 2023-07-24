@@ -14,8 +14,11 @@ export function createDocumentStore<T = any>(
     const store = atom<RemoteData<T | null>>({
         status: 'loading',
     });
+
     onMount(store, () => {
+        // Do not run on server-side to prevent hydration mismatch
         if (typeof window === 'undefined') return;
+
         return onSnapshot(
             doc,
             (doc) => {
@@ -26,5 +29,6 @@ export function createDocumentStore<T = any>(
             }
         );
     });
+
     return store;
 }
