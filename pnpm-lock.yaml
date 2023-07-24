@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@nanostores/logger':
+    specifier: ^0.2.3
+    version: 0.2.3(nanostores@0.9.3)
+  '@nanostores/react':
+    specifier: ^0.7.1
+    version: 0.7.1(nanostores@0.9.3)(react@18.2.0)
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -77,6 +83,9 @@ dependencies:
   lucide-react:
     specifier: ^0.262.0
     version: 0.262.0(react@18.2.0)
+  nanostores:
+    specifier: ^0.9.3
+    version: 0.9.3
   next:
     specifier: 13.4.11
     version: 13.4.11(@babel/core@7.22.9)(react-dom@18.2.0)(react@18.2.0)
@@ -2371,6 +2380,26 @@ packages:
     dependencies:
       lodash: 4.17.21
     dev: true
+
+  /@nanostores/logger@0.2.3(nanostores@0.9.3):
+    resolution: {integrity: sha512-imuhrgyONQ75kDkJxlhgYNK27rmTehyzV4bEty51fk42IO44hJtpoi4E/eteRfdS6Zl6Vc9cFEoiGHhZfzawhA==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: '>=0.9.2'
+    dependencies:
+      nanostores: 0.9.3
+    dev: false
+
+  /@nanostores/react@0.7.1(nanostores@0.9.3)(react@18.2.0):
+    resolution: {integrity: sha512-EXQg9N4MdI4eJQz/AZLIx3hxQ6BuBmV4Q55bCd5YCSgEOAW7tGTsIZxpRXxvxLXzflNvHTBvfrDNY38TlSVBkQ==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
+    peerDependencies:
+      nanostores: ^0.9.0
+      react: '>=18.0.0'
+    dependencies:
+      nanostores: 0.9.3
+      react: 18.2.0
+    dev: false
 
   /@next/env@13.4.11:
     resolution: {integrity: sha512-BbPLOkfFFca+OpwSmGhNrl56B3ZzOFS4eJ85SpGTDpjlXoz7XFfS3MMOfjUCTuW1laTrQjm98I9Q30tsYpr8ew==}
@@ -9349,6 +9378,11 @@ packages:
       to-regex: 3.0.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /nanostores@0.9.3:
+    resolution: {integrity: sha512-KobZjcVyNndNrb5DAjfs0WG0lRcZu5Q1BOrfTOxokFLi25zFrWPjg+joXC6kuDqNfSt9fQwppyjUBkRPtsL+8w==}
+    engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     dev: false
 
   /natural-compare@1.4.0:
