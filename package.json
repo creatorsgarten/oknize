@@ -21,7 +21,7 @@
         "@radix-ui/react-toast": "^1.1.4",
         "@tanstack/react-query": "^4.29.25",
         "@tanstack/react-table": "^8.9.3",
-        "@types/node": "20.4.2",
+        "@types/node": "20.4.6",
         "@types/react": "18.2.15",
         "@types/react-dom": "18.2.7",
         "add": "^2.0.6",
