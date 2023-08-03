@@ -163,4 +163,17 @@ export function borrowTime(
     currentSlot: ScheduleSlot,
     borrowedSlot: ScheduleSlot,
     schedule: ScheduleSlot[]
-) {}
+) {
+    // borrow time - remove time from borrowedSlot, append time to currentSlot, shift every time in betwee
+    // if borrowedSlot is earlier than currentSlot, return
+    const currentSlotIndex = schedule.findIndex(
+        (slot) => slot.id === currentSlot.id
+    );
+    const borrowedSlotIndex = schedule.findIndex(
+        (slot) => slot.id === borrowedSlot.id
+    );
+
+    if (borrowedSlotIndex < currentSlotIndex) {
+        return schedule;
+    }
+}
