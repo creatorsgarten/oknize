@@ -35,7 +35,7 @@
         "eslint-config-next": "13.4.11",
         "firebase": "^10.0.0",
         "framer-motion": "^10.13.0",
-        "lucide-react": "^0.262.0",
+        "lucide-react": "^0.263.0",
         "nanostores": "^0.9.3",
         "next": "13.4.11",
         "next-pwa": "^5.6.0",
