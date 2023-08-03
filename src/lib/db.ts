@@ -2,10 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import {
     DocumentData,
-    getFirestore,
     doc,
     setDoc,
-    updateDoc,
     getDoc,
     addDoc,
     collection,
@@ -13,33 +11,31 @@ import {
     onSnapshot,
     deleteDoc,
 } from 'firebase/firestore';
-import { ScheduleSlot, adjustTime, sortSchedule } from './schedule';
+import {
+    ScheduleDoc,
+    ScheduleSlot,
+    adjustTime,
+    sortSchedule,
+} from './schedule';
 import { EventItem } from '@/hooks/useEvent';
 import { db } from './firebase';
+import { getOrCreate } from './mapUtils';
+import { DocumentStore, createDocumentStore } from './nanofire';
 
 /*
 Schedule
 */
 
-export function getScheduleRef(uid: string) {
+function getScheduleRef(uid: string) {
     return doc(db, 'schedule', uid);
 }
 
-export async function getSchedule(uid: string) {
-    const scheduleRef = getScheduleRef(uid);
-    const scheduleDoc = await getDoc(scheduleRef);
-    if (scheduleDoc.exists()) {
-        return scheduleDoc.data();
-    } else {
-        return null;
-    }
-}
+const scheduleStores = new Map<string, DocumentStore<ScheduleDoc>>();
 
-export function subscribeSchedule(uid: string, callback: Function) {
-    const scheduleRef = getScheduleRef(uid);
-    return onSnapshot(scheduleRef, (doc) => {
-        callback(doc.data());
-    });
+export function getScheduleStore(uid: string) {
+    return getOrCreate(scheduleStores, uid, () =>
+        createDocumentStore<ScheduleDoc>(getScheduleRef(uid))
+    );
 }
 
 // add

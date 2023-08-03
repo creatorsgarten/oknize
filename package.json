@@ -10,6 +10,8 @@
         "format": "prettier --write ."
     },
     "dependencies": {
+        "@nanostores/logger": "^0.2.3",
+        "@nanostores/react": "^0.7.1",
         "@radix-ui/react-accordion": "^1.1.2",
         "@radix-ui/react-checkbox": "^1.0.4",
         "@radix-ui/react-dialog": "^1.0.4",
@@ -34,6 +36,7 @@
         "firebase": "^10.0.0",
         "framer-motion": "^10.13.0",
         "lucide-react": "^0.262.0",
+        "nanostores": "^0.9.3",
         "next": "13.4.11",
         "next-pwa": "^5.6.0",
         "postcss": "8.4.26",

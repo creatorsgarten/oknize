@@ -1,30 +1,8 @@
-import {
-    Dialog,
-    DialogContent,
-    DialogClose,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/ui/dialog';
-
 import * as Tabs from '@radix-ui/react-tabs';
 
-import { useEffect, useState } from 'react';
-import {
-    adjustTimeToTask,
-    deleteTask,
-    editTask,
-    subscribeSchedule,
-} from '@/lib/db';
-import {
-    ScheduleSlot,
-    adjustTime,
-    getCurrentSlot,
-    getNextSlot,
-    getTimeLeft,
-} from '@/lib/schedule';
-import CurrentTime from '@/components/time/CurrentTime';
+import { useEffect } from 'react';
+import { adjustTimeToTask } from '@/lib/db';
+import { getTimeLeft } from '@/lib/schedule';
 import ProgressBar from '@/components/time/ProgressBar';
 import runOneSignal from '@/lib/onesignal';
 import Link from 'next/link';
@@ -33,6 +11,7 @@ import { useEvent } from '@/hooks/useEvent';
 import { cn } from '@/lib/utils';
 import { InferGetServerSidePropsType } from 'next';
 import { MinusIcon, PlusIcon, RepeatIcon } from 'lucide-react';
+import useScheduleSlot from '@/hooks/useScheduleSlot';
 
 const Navbar = () => {
     return (
@@ -68,45 +47,9 @@ export function getServerSideProps({ params }: { params: { id: string } }) {
 export default function View({
     id,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const [ScheduleSlots, setScheduleSlots] = useState<ScheduleSlot[]>([]);
-    const [currentSlot, setCurrentSlot] = useState<ScheduleSlot | null>(null);
-    const [nextSlot, setNextSlot] = useState<ScheduleSlot | null>(null);
-    const [currentTime, setCurrentTime] = useState('');
+    const { scheduleSlots, currentSlot, nextSlot, currentTime } =
+        useScheduleSlot(id);
     const { data: event } = useEvent(id);
-
-    useEffect(() => {
-        const unsubscribe = subscribeSchedule(
-            id,
-            (data: { agenda: ScheduleSlot[] }) => {
-                setScheduleSlots(data.agenda);
-
-                setCurrentSlot(getCurrentSlot(data.agenda));
-                setNextSlot(getNextSlot(data.agenda));
-            }
-        );
-
-        return () => {
-            unsubscribe();
-        };
-    }, [id]);
-
-    useEffect(() => {
-        function updateInterval() {
-            setCurrentSlot(getCurrentSlot(ScheduleSlots));
-            setNextSlot(getNextSlot(ScheduleSlots));
-        }
-
-        const interval = setInterval(() => {
-            var today = new Date();
-            var now = today.toLocaleTimeString('th-TH');
-            setCurrentTime(now);
-
-            updateInterval();
-        }, 1000);
-        return () => {
-            clearInterval(interval);
-        };
-    }, [ScheduleSlots]);
 
     useEffect(() => {
         runOneSignal();
@@ -119,20 +62,27 @@ export default function View({
             <main
                 className={`flex min-h-screen flex-col items-center px-4  pb-12 sm:px-12`}
             >
-                
-                <div className={`mx-auto mt-8 mb-8 w-full max-w-lg text-left`}>
-                    <div className="grid grid-cols-12 gap-4 items-center">
+                <div className={`mx-auto mb-8 mt-8 w-full max-w-lg text-left`}>
+                    <div className="grid grid-cols-12 items-center gap-4">
                         <div className="col-span-4 sm:col-span-2">
-                            <div className='event-qr'>
-                            <img src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=https://oknize.grtn.org/e/${id}/&chld=L|2`} className='w-full' />
+                            <div className="event-qr">
+                                <img
+                                    src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=https://oknize.grtn.org/e/${id}/&chld=L|2`}
+                                    className="w-full"
+                                />
                             </div>
                         </div>
                         <div className="col-span-8 sm:col-span-10">
-                            <h1 className={`line-clamp-1 truncate text-lg sm:text-xl font-bold event-title`}>{event?.name}</h1>
-                            <p className='line-clamp-2 text-gray-500'>{event?.description}</p>
+                            <h1
+                                className={`event-title line-clamp-1 truncate text-lg font-bold sm:text-xl`}
+                            >
+                                {event?.name}
+                            </h1>
+                            <p className="line-clamp-2 text-gray-500">
+                                {event?.description}
+                            </p>
                         </div>
                     </div>
-
                 </div>
                 <div className="flex flex-col items-center justify-center gap-4 rounded-2xl bg-gradient-to-r from-[#7049FF] to-[#8B55FF] px-4 py-8 sm:px-8">
                     <div className="mx-auto flex w-full max-w-sm flex-col items-center gap-6 rounded-2xl bg-white p-10 shadow-md md:col-span-2">
@@ -181,7 +131,7 @@ export default function View({
                                         id,
                                         5,
                                         currentSlot,
-                                        ScheduleSlots
+                                        scheduleSlots
                                     );
                                 }}
                                 className="group flex flex-col items-center gap-4"
@@ -199,7 +149,7 @@ export default function View({
                                         id,
                                         -5,
                                         currentSlot,
-                                        ScheduleSlots
+                                        scheduleSlots
                                     );
                                 }}
                                 className="group flex flex-col items-center gap-4"
@@ -254,7 +204,7 @@ export default function View({
                         </Tabs.List>
 
                         <div className="mt-4 flex flex-col gap-2">
-                            {ScheduleSlots.map((slot) => {
+                            {scheduleSlots.map((slot) => {
                                 return (
                                     <div
                                         className={cn(
@@ -268,8 +218,29 @@ export default function View({
                                         <h1 className="font-bold text-gray-800">
                                             {slot.title}
                                         </h1>
-                                        <p className={'mt-1 text-gray-500 text-base flex gap-2 items-center'}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className='text-xs text-gray-300 opacity-50' height="1em" viewBox="0 0 512 512"><path fill="#8B55FF" d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg> <time className="slot-start">{slot.start}</time> - <time className='slot-end'>{slot.end}</time>
+                                        <p
+                                            className={
+                                                'mt-1 flex items-center gap-2 text-base text-gray-500'
+                                            }
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="text-xs text-gray-300 opacity-50"
+                                                height="1em"
+                                                viewBox="0 0 512 512"
+                                            >
+                                                <path
+                                                    fill="#8B55FF"
+                                                    d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"
+                                                />
+                                            </svg>{' '}
+                                            <time className="slot-start">
+                                                {slot.start}
+                                            </time>{' '}
+                                            -{' '}
+                                            <time className="slot-end">
+                                                {slot.end}
+                                            </time>
                                         </p>
                                     </div>
                                 );

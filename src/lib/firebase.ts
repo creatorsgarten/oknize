@@ -19,6 +19,14 @@ const app = initializeApp(firebaseConfig);
 export default app;
 
 export const db = getFirestore(app);
-if (process.env.NEXT_PUBLIC_FIREBASE_USE_EMULATOR === 'true') {
-    connectFirestoreEmulator(db, 'localhost', 8080);
+
+const globalState = globalThis as unknown as {
+    __firebaseInitialized?: boolean;
+};
+
+if (!globalState.__firebaseInitialized) {
+    globalState.__firebaseInitialized = true;
+    if (process.env.NEXT_PUBLIC_FIREBASE_USE_EMULATOR === 'true') {
+        connectFirestoreEmulator(db, 'localhost', 8080);
+    }
 }
