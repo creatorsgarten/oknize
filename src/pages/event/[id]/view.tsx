@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { InferGetServerSidePropsType } from 'next';
 import { MinusIcon, PlusIcon, RepeatIcon } from 'lucide-react';
 import useScheduleSlot from '@/hooks/useScheduleSlot';
+import QRCode from 'react-qr-code';
 
 const Navbar = () => {
     return (
@@ -65,10 +66,25 @@ export default function View({
                 <div className={`mx-auto mb-8 mt-8 w-full max-w-lg text-left`}>
                     <div className="grid grid-cols-12 items-center gap-4">
                         <div className="col-span-4 sm:col-span-2">
-                            <div className="event-qr">
-                                <img
-                                    src={`https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=https://oknize.grtn.org/e/${id}/&chld=L|2`}
-                                    className="w-full"
+                            <div
+                                style={{
+                                    height: 'auto',
+                                    margin: '0 auto',
+                                    maxWidth: 64,
+                                    width: '100%',
+                                }}
+                            >
+                                <QRCode
+                                    size={256}
+                                    style={{
+                                        height: 'auto',
+                                        maxWidth: '100%',
+                                        width: '100%',
+                                    }}
+                                    fgColor="#7049FF"
+                                    value={`https://oknize.grtn.org/e/${id}/view`}
+                                    viewBox={`0 0 256 256`}
+                                    className="rounded-sm shadow-sm"
                                 />
                             </div>
                         </div>

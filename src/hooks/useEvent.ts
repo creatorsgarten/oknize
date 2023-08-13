@@ -1,3 +1,4 @@
+import { useAuth } from '@/lib/auth';
 import { getEventById, getEventList } from '@/lib/db';
 import { ScheduleSlot } from '@/lib/schedule';
 import { useQuery } from '@tanstack/react-query';
@@ -18,8 +19,14 @@ export function useEvent(eventId: string) {
 }
 
 export function useEventList() {
+    const { user } = useAuth();
+
     return useQuery({
-        queryKey: ['eventList'],
-        queryFn: getEventList,
+        queryKey: ['eventList', user?.uid ?? ''],
+        queryFn: ({ queryKey }) => {
+            const [_, uid] = queryKey as ['eventList', string];
+            console.log('hi', user, uid);
+            return getEventList(uid);
+        },
     });
 }

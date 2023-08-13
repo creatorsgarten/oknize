@@ -10,6 +10,8 @@ import {
     getDocs,
     onSnapshot,
     deleteDoc,
+    query,
+    where,
 } from 'firebase/firestore';
 import {
     ScheduleDoc,
@@ -21,6 +23,9 @@ import { EventItem } from '@/hooks/useEvent';
 import { db } from './firebase';
 import { getOrCreate } from './mapUtils';
 import { DocumentStore, createDocumentStore } from './nanofire';
+import { UserData } from './auth';
+import { User as FirebaseUser } from 'firebase/auth';
+import { QueryFunction } from '@tanstack/react-query';
 
 /*
 Schedule
@@ -112,8 +117,11 @@ export async function adjustTimeToTask(
 Event
 */
 
-export async function getEventList() {
-    const eventListRef = collection(db, 'schedule');
+export async function getEventList(uid: string) {
+    const eventListRef = query(
+        collection(db, 'schedule'),
+        where('admin', 'array-contains', uid)
+    );
     const eventListSnapshot = await getDocs(eventListRef);
     const eventList = eventListSnapshot.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
@@ -137,4 +145,41 @@ export async function deleteEvent(eventId: string) {
     const eventRef = doc(db, 'schedule', eventId);
     // delete event
     await deleteDoc(eventRef);
+}
+
+/*
+Auth
+*/
+export async function getUser(uid: string): Promise<UserData> {
+    const userRef = doc(db, 'user', uid);
+    const userSnapshot = await getDoc(userRef);
+    return {
+        ...userSnapshot.data(),
+    } as UserData;
+}
+
+export async function setUser(uid: string, user: any) {
+    const userRef = doc(db, 'user', uid);
+    await setDoc(userRef, user, { merge: true });
+}
+
+export async function onSignin(firebaseUser: FirebaseUser): Promise<UserData> {
+    const user = await getUser(firebaseUser.uid);
+
+    if (!user) {
+        const newUserData: UserData = {
+            ...firebaseUser,
+            email: firebaseUser?.email ?? '',
+        };
+
+        await setUser(firebaseUser.uid, newUserData);
+
+        const newUser = await getUser(firebaseUser.uid);
+        return newUser;
+    } else {
+        return {
+            ...firebaseUser,
+            ...user,
+        };
+    }
 }

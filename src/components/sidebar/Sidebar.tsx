@@ -1,8 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { ArrowLeft, ArrowRight, Search } from 'lucide-react';
 
 import {
     Accordion,
@@ -10,7 +7,6 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Badge } from '../ui/badge';
 import { useEventList } from '@/hooks/useEvent';
 
 const Sidebar = () => {

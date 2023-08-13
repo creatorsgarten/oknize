@@ -2,17 +2,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { EventItem } from '@/hooks/useEvent';
+import { useAuth } from '@/lib/auth';
 import { addEvent } from '@/lib/db';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const CreateEventPage = () => {
     const router = useRouter();
+    const { user } = useAuth();
     const [eventData, setEventData] = useState({
         name: '',
         description: '',
         status: 'public',
         agenda: [],
+        admin: [user?.uid],
     });
 
     const handleEventInputChange = (
