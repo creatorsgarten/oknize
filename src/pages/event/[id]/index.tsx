@@ -35,6 +35,7 @@ import useScheduleSlot from '@/hooks/useScheduleSlot';
 import { useRouter } from 'next/router';
 
 import QrCode from 'react-qr-code';
+import { useAuth } from '@/lib/auth';
 
 export function getServerSideProps({ params }: { params: { id: string } }) {
     return {
@@ -51,10 +52,17 @@ export default function View({
     const { scheduleSlots, currentSlot, nextSlot, currentTime } =
         useScheduleSlot(id);
     const router = useRouter();
+    const { user } = useAuth();
 
     useEffect(() => {
         runOneSignal();
     }, []);
+
+    useEffect(() => {
+        if (!user) {
+            router.push('/login');
+        }
+    }, [user, router]);
 
     const handleOnDeleteTaskData = (data: ScheduleSlot) => {
         deleteTask(id, scheduleSlots, data);

@@ -61,11 +61,15 @@ export const AuthProvider = ({
             // should not have user
             case '/':
                 break;
+            case '/event':
             case '/event/create':
                 if (!user) {
                     router.push('/login');
                 }
                 break;
+
+            // event with id
+
             case '/login':
                 if (user) {
                     router.push('/');
@@ -73,9 +77,9 @@ export const AuthProvider = ({
                 break;
             // should have user
             default:
-                if (!user) {
-                    router.push('/login');
-                }
+                // if (!user) {
+                //     router.push('/login');
+                // }
                 break;
         }
     }, [user, router]);
