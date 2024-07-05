@@ -21,7 +21,7 @@ import CurrentTime from '@/components/time/CurrentTime';
 
 import TaskTable from '@/components/table/TaskTable/TaskTableItem';
 import ProgressBar from '@/components/time/ProgressBar';
-import runOneSignal from '@/lib/onesignal';
+import { subscribeToNotification } from '@/lib/onesignal';
 import { Button } from '@/components/ui/button';
 import { Globe, ListFilter, Search } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -55,7 +55,7 @@ export default function View({
     const { user } = useAuth();
 
     useEffect(() => {
-        runOneSignal();
+        subscribeToNotification();
     }, []);
 
     useEffect(() => {
