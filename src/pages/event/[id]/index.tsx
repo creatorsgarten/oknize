@@ -14,7 +14,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { addTask, deleteTask, editTask } from '@/lib/db';
 import { ScheduleSlot } from '@/lib/schedule';
 import CurrentTime from '@/components/time/CurrentTime';
@@ -58,23 +58,26 @@ export default function View({
         subscribeToNotification();
     }, []);
 
-    useEffect(() => {
-        if (!user) {
-            router.push('/login');
-        }
-    }, [user, router]);
+    const handleOnDeleteTaskData = useCallback(
+        (data: ScheduleSlot) => {
+            deleteTask(id, scheduleSlots, data);
+        },
+        [id, scheduleSlots]
+    );
 
-    const handleOnDeleteTaskData = (data: ScheduleSlot) => {
-        deleteTask(id, scheduleSlots, data);
-    };
+    const handleSaveChanges = useCallback(
+        (data: ScheduleSlot) => {
+            editTask(id, scheduleSlots, data);
+        },
+        [id, scheduleSlots]
+    );
 
-    const handleSaveChanges = (data: ScheduleSlot) => {
-        editTask(id, scheduleSlots, data);
-    };
-
-    const handleAddTask = (data: ScheduleSlot) => {
-        addTask(id, scheduleSlots, data);
-    };
+    const handleAddTask = useCallback(
+        (data: ScheduleSlot) => {
+            addTask(id, scheduleSlots, data);
+        },
+        [id, scheduleSlots]
+    );
 
     return (
         <div>
