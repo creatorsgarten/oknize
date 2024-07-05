@@ -1,3 +1,5 @@
+'use client';
+// This file has been sourced from: /Users/betich/code/work/Creatorsgarten/Oknize/src/pages/event/index.tsx
 import CardCarousel from '@/components/CardCarousel';
 import HomeTemplateCard from '@/components/card/HomeTemplateCard';
 import { DataTable, DesktopDataTable } from '@/components/table/DataTable';

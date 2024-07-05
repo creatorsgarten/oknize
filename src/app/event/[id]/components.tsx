@@ -1,19 +1,12 @@
+'use client';
+// This file has been sourced from: /Users/betich/code/work/Creatorsgarten/Oknize/src/pages/event/[id]/index.tsx
 import {
     Dialog,
     DialogContent,
     DialogTrigger,
-    DialogFooter,
-    DialogClose,
     DialogHeader,
-    DialogTitle,
 } from '@/components/ui/dialog';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { useCallback, useEffect } from 'react';
 import { addTask, deleteTask, editTask } from '@/lib/db';
 import { ScheduleSlot } from '@/lib/schedule';
@@ -37,17 +30,7 @@ import { useRouter } from 'next/router';
 import QrCode from 'react-qr-code';
 import { useAuth } from '@/lib/auth';
 
-export function getServerSideProps({ params }: { params: { id: string } }) {
-    return {
-        props: {
-            id: params.id,
-        },
-    };
-}
-
-export default function View({
-    id,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function View({ id }: { id: string }) {
     const { data: event } = useEvent(id);
     const { scheduleSlots, currentSlot, nextSlot, currentTime } =
         useScheduleSlot(id);

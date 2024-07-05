@@ -1,3 +1,5 @@
+'use client';
+// This file has been sourced from: /Users/betich/code/work/Creatorsgarten/Oknize/src/pages/index.tsx
 import { useRouter } from 'next/router';
 import { Button } from '../components/ui/button';
 import Navbar from '@/components/navbar/Navbar';

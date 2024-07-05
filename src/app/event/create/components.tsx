@@ -1,7 +1,8 @@
+'use client';
+// This file has been sourced from: /Users/betich/code/work/Creatorsgarten/Oknize/src/pages/event/create.tsx
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { EventItem } from '@/hooks/useEvent';
 import { useAuth } from '@/lib/auth';
 import { addEvent } from '@/lib/db';
 import { useRouter } from 'next/router';

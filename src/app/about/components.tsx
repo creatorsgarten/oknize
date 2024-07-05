@@ -1,3 +1,5 @@
+'use client';
+// This file has been sourced from: /Users/betich/code/work/Creatorsgarten/Oknize/src/pages/about/index.tsx
 import Footer from '@/components/footer/Footer';
 import Navbar from '@/components/navbar/Navbar';
 import Link from 'next/link';

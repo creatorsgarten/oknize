@@ -1,9 +1,34 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { type Metadata } from 'next';
+import LayoutClientComponent from './layout-client-component';
 
-export default function Document() {
+export const metadata: Metadata = {
+    title: `Oknize`,
+    description: 'สร้างอีเวนต์ให้ nice ด้วย Oknize',
+    openGraph: {
+        title: 'Oknize',
+        type: 'website',
+        url: 'https://oknize.grtn.org/',
+        images: [
+            {
+                url: '/Thumbnail.png',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'Oknize',
+        description: 'สร้างอีเวนต์ให้ nice ด้วย Oknize',
+    },
+};
+
+export default function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
-        <Html lang="en">
-            <Head>
+        <html lang="en">
+            <head>
                 <link
                     rel="apple-touch-icon"
                     sizes="180x180"
@@ -32,11 +57,10 @@ export default function Document() {
 
                 {/* manifest */}
                 <link rel="manifest" href="/manifest.json" />
-            </Head>
+            </head>
             <body>
-                <Main />
-                <NextScript />
+                <LayoutClientComponent> {children} </LayoutClientComponent>
             </body>
-        </Html>
+        </html>
     );
 }

@@ -1,25 +1,25 @@
+'use client';
+import { Metadata } from 'next';
 import Navbar from '@/components/navbar/Navbar';
 import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import { Nunito, Noto_Sans_Thai } from 'next/font/google';
-import { cn } from '@/lib/utils';
+import { Noto_Sans_Thai } from 'next/font/google';
 import Footer from '@/components/footer/Footer';
 import Head from 'next/head';
 import Sidebar from '@/components/sidebar/Sidebar';
 
-import {
-    QueryClient,
-    QueryClientProvider,
-    useQuery,
-} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from '@/lib/auth';
 
 const queryClient = new QueryClient();
 
 const notosansthai = Noto_Sans_Thai({ subsets: ['thai'] });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function LayoutClientComponent({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     const router = useRouter();
 
     return (
@@ -83,7 +83,7 @@ export default function App({ Component, pageProps }: AppProps) {
                                         : 'col-span-12'
                                 }
                             >
-                                <Component {...pageProps} />
+                                <>{children}</>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ export default function App({ Component, pageProps }: AppProps) {
                             '/',
                             '/about'.includes(router.pathname),
                         ] && <Navbar />}
-                        <Component {...pageProps} />
+                        {children}
                         {![
                             '/create',
                             '/',

@@ -1,3 +1,5 @@
+'use client';
+// This file has been sourced from: /Users/betich/code/work/Creatorsgarten/Oknize/src/pages/event/[id]/view.tsx
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { useEffect } from 'react';
@@ -37,17 +39,7 @@ const Navbar = () => {
     );
 };
 
-export function getServerSideProps({ params }: { params: { id: string } }) {
-    return {
-        props: {
-            id: params.id,
-        },
-    };
-}
-
-export default function View({
-    id,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function View({ id }: { id: string }) {
     const { scheduleSlots, currentSlot, nextSlot, currentTime } =
         useScheduleSlot(id);
     const { data: event } = useEvent(id);
