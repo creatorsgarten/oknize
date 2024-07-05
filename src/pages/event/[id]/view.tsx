@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { adjustTimeToTask } from '@/lib/db';
 import { getTimeLeft } from '@/lib/schedule';
 import ProgressBar from '@/components/time/ProgressBar';
-import runOneSignal from '@/lib/onesignal';
+import { subscribeToNotification } from '@/lib/onesignal';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEvent } from '@/hooks/useEvent';
@@ -53,7 +53,7 @@ export default function View({
     const { data: event } = useEvent(id);
 
     useEffect(() => {
-        runOneSignal();
+        subscribeToNotification();
     }, []);
 
     return (

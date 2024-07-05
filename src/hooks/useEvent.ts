@@ -25,7 +25,6 @@ export function useEventList() {
         queryKey: ['eventList', user?.uid ?? ''],
         queryFn: ({ queryKey }) => {
             const [_, uid] = queryKey as ['eventList', string];
-            console.log('hi', user, uid);
             return getEventList(uid);
         },
     });
