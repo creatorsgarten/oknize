@@ -41,6 +41,15 @@ export default function EditTaskDialog({
         });
     };
 
+    const handleOnDialogResponsiblePeopleChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        setSelectedScheduleData({
+            ...selectedScheduleData,
+            responsiblePeople: event.target.value.split(' '),
+        });
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -112,8 +121,8 @@ export default function EditTaskDialog({
                                 type="text"
                                 id="responsiblePeople"
                                 placeholder="(e.g. Sila Tee)"
-                                onChange={handleOnDialogInputChange}
-                                value={selectedScheduleData.responsiblePeople.join(
+                                onChange={handleOnDialogResponsiblePeopleChange}
+                                value={selectedScheduleData?.responsiblePeople?.join(
                                     ' '
                                 )}
                             />

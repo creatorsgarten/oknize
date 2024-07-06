@@ -55,7 +55,7 @@ const TaskTable = ({ tableData, onSave, onDelete, onAdd }: TaskTableProps) => {
                                 <TableCell>{data.place}</TableCell>
                                 {/* <TableCell>{data.remark}</TableCell> */}
                                 <TableCell>
-                                    {data.responsiblePeople.join(' ')}
+                                    {data?.responsiblePeople?.join(' ')}
                                 </TableCell>
 
                                 <TableCell>
